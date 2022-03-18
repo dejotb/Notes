@@ -23,21 +23,20 @@ const container = document.querySelector('.container');
 const buttonCreateNewNote = document.querySelector('.button--cta');
 const buttonSaveNote = document.querySelector('.form__button');
 const listItems = document.querySelector('.list__items');
-let formTitle = document.querySelector('.form__title');
-let formText = document.querySelector('.form__text');
+let formTitle, formText = ''
 
 class App {
     #notes = [];
 
     constructor() {
         buttonCreateNewNote.addEventListener('click', this._renderListItem.bind(this));
-        buttonSaveNote.addEventListener('click', _saveNote.bind(this))
+
     }
 
     _renderListItem() {
         const html = `<li class="list_item">
         <form class="form" name="notes__form">
-            <input type="text" class="form__title" placeholder="Title..." />
+        <input type="text" class="form__title" placeholder="Title..." />
             <textarea
             name=""
             class="form__text"
@@ -45,20 +44,26 @@ class App {
             cols="50"
             rows="10" placeholder="Text..."
             ></textarea>
-            <button class="button form__button" tyoe="submit">Add Tassssk</button>
+            <button class="button form__button" tyoe="submit">Save Task</button>
         </form>
         </li>`;
+
         listItems.insertAdjacentHTML('beforeend', html);
 
+        formTitle = document.querySelector('.form__title');
+        formText = document.querySelector('.form__text');
 
+        this._saveNote()
     }
 
     _saveNote() {
-        const note = new Note(formTitle, formText);
-        this.#notes.push(note);
-        console.log(this.#notes);
+        const note = new Note(formTitle.value, formText.value);
+                console.log(note.text ='lol');
+                this.#notes.push(note);
+                console.log(this.#notes);
 
-        this._clearInput()
+
+
     }
 
     _clearInput() {

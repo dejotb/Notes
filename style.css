@@ -152,7 +152,6 @@ p:not(:last-child) {
   width: 90vw;
   height: 90vh;
   padding: 2rem;
-  background-color: #3696f2;
   overflow-y: scroll;
 }
 
@@ -168,15 +167,16 @@ p:not(:last-child) {
 
 .form {
   display: grid;
+  grid-gap: 0.5rem;
   max-width: 10rem;
-  /* padding: 1rem; */
 }
 
 .form__title {
-  /* width: 100%; */
+  background-color: #3696f2;
 }
 
 .form__text {
   max-width: 80vw;
   max-height: 30vh;
+  background-color: #3696f2;
 }
