@@ -45,7 +45,7 @@ class App {
             cols="50"
             rows="10" placeholder="Text..."
             ></textarea>
-            <button class="button form__button" tyoe="submit">Add Task</button>
+            <button class="button form__button" tyoe="submit">Add Tassssk</button>
         </form>
         </li>`;
         listItems.insertAdjacentHTML('beforeend', html);
