@@ -10,13 +10,7 @@ class Task {
 }
 
 
-class App {
 
-
-    _renderListItem() {
-
-    }
-}
 
 
 // APPLICATION ARCHITECTURE
@@ -25,19 +19,22 @@ const button = document.querySelector('.list__button');
 const listItems = document.querySelector('.list__items');
 let inputText = document.querySelector('.list__input');
 
+class App {
+    #tasks =[];
 
+    constructor() {
+        button.addEventListener('click', this._renderListItem)
+    }
 
-function renderListItem() {
-    button.addEventListener('click', function(e) {
-        console.log(e.target);
+    _renderListItem() {
         const html = `<li>${inputText.value}</li>`;
         listItems.insertAdjacentHTML('beforeend', html);
-        clearInput()
-    })
+
+        this._clearInput()
+    }
+
+    clearInput() {
+        inputText.value = '';
+    }
 }
 
-function clearInput() {
-    inputText.value = '';
-}
-
-renderListItem()
