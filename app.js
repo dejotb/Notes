@@ -21,22 +21,37 @@ class Note {
 // APPLICATION ARCHITECTURE
 const container = document.querySelector('.container');
 const buttonCreateNewNote = document.querySelector('.button--cta');
-const buttonSaveNote = document.querySelector('.form__button');
+const formTitle = document.querySelector('.form__title');
+const formText = document.querySelector('.form__text');
 const listItems = document.querySelector('.list__items');
-let formTitle, formText = ''
+buttonSaveNote = document.querySelector('.form__button');
 
 class App {
     #notes = [];
 
     constructor() {
-        buttonCreateNewNote.addEventListener('click', this._renderListItem.bind(this));
+        buttonCreateNewNote.addEventListener('click', this._newNote.bind(this));
+        listItems.addEventListener('click', this._showSelectedItem.bind(this));
+    }
+
+    _newNote() {
+        // create new note
+        const note = new Note();
+        this._renderListItem(note)
+
+        // add new note to notes
+        this.#notes.push(note);
+        console.log(this.#notes);
+
+        // save filled inputs
+
 
     }
 
-    _renderListItem() {
-        const html = `<li class="list_item">
+    _renderListItem(note) {
+        const html = `<li class="list_item" data-id="${note.id}">
         <form class="form" name="notes__form">
-        <input type="text" class="form__title" placeholder="Title..." />
+            <input type="text" class="form__title" placeholder="Title...">
             <textarea
             name=""
             class="form__text"
@@ -44,30 +59,24 @@ class App {
             cols="50"
             rows="10" placeholder="Text..."
             ></textarea>
-            <button class="button form__button" tyoe="submit">Save Task</button>
+            <button class="button form__button" type="submit">Save Task</button>
         </form>
         </li>`;
 
         listItems.insertAdjacentHTML('beforeend', html);
 
-        formTitle = document.querySelector('.form__title');
-        formText = document.querySelector('.form__text');
-
-        this._saveNote()
     }
 
-    _saveNote() {
-        const note = new Note(formTitle.value, formText.value);
-                console.log(note.text ='lol');
-                this.#notes.push(note);
-                console.log(this.#notes);
 
-
-
-    }
 
     _clearInput() {
         formTitle = '';
+    }
+
+    _showSelectedItem(e) {
+        const el = e.target.closest('.list_item').dataset.id;
+
+        console.log(el);
     }
 }
 
