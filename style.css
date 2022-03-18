@@ -149,13 +149,34 @@ p:not(:last-child) {
 /* container styling */
 
 .container {
-  width: 80vw;
+  width: 90vw;
   height: 90vh;
   padding: 2rem;
   background-color: #3696f2;
+  overflow-y: scroll;
 }
 
-.list__input {
-  width: 80%;
-  padding: 1rem;
+.list__items {
+  display: grid;
+  grid-row-gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.list__item {
+  display: grid;
+}
+
+.form {
+  display: grid;
+  max-width: 10rem;
+  /* padding: 1rem; */
+}
+
+.form__title {
+  /* width: 100%; */
+}
+
+.form__text {
+  max-width: 80vw;
+  max-height: 30vh;
 }

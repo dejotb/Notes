@@ -1,9 +1,14 @@
 
 
 
-class Task {
-    constructor() {
+class Note {
+    date = new Date();
 
+    id = `${new Date().getTime()}`.slice(-10);
+
+    constructor(title, text) {
+        this.title = title  // input title
+        this.text = text // input text
     }
 
 
@@ -15,26 +20,50 @@ class Task {
 
 // APPLICATION ARCHITECTURE
 const container = document.querySelector('.container');
-const button = document.querySelector('.list__button');
+const buttonCreateNewNote = document.querySelector('.button--cta');
+const buttonSaveNote = document.querySelector('.form__button');
 const listItems = document.querySelector('.list__items');
-let inputText = document.querySelector('.list__input');
+let formTitle = document.querySelector('.form__title');
+let formText = document.querySelector('.form__text');
 
 class App {
-    #tasks =[];
+    #notes = [];
 
     constructor() {
-        button.addEventListener('click', this._renderListItem)
+        buttonCreateNewNote.addEventListener('click', this._renderListItem.bind(this));
+        buttonSaveNote.addEventListener('click', _saveNote.bind(this))
     }
 
     _renderListItem() {
-        const html = `<li>${inputText.value}</li>`;
+        const html = `<li class="list_item">
+        <form class="form" name="notes__form">
+            <input type="text" class="form__title" placeholder="Title..." />
+            <textarea
+            name=""
+            class="form__text"
+            required=""
+            cols="50"
+            rows="10" placeholder="Text..."
+            ></textarea>
+            <button class="button form__button" tyoe="submit">Add Task</button>
+        </form>
+        </li>`;
         listItems.insertAdjacentHTML('beforeend', html);
+
+
+    }
+
+    _saveNote() {
+        const note = new Note(formTitle, formText);
+        this.#notes.push(note);
+        console.log(this.#notes);
 
         this._clearInput()
     }
 
-    clearInput() {
-        inputText.value = '';
+    _clearInput() {
+        formTitle = '';
     }
 }
 
+const app = new App()
