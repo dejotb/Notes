@@ -20,18 +20,19 @@ class Note {
 
 // APPLICATION ARCHITECTURE
 const container = document.querySelector('.container');
-const buttonCreateNewNote = document.querySelector('.button--cta');
 const formTitle = document.querySelector('.form__title');
 const formText = document.querySelector('.form__text');
 const listItems = document.querySelector('.list__items');
-buttonSaveNote = document.querySelector('.form__button');
+const buttonCreateNewNote = document.querySelector('.button--cta');
+
 
 class App {
     #notes = [];
 
     constructor() {
         buttonCreateNewNote.addEventListener('click', this._newNote.bind(this));
-        listItems.addEventListener('click', this._showSelectedItem.bind(this));
+        listItems.addEventListener('click', this._saveSelectedNote.bind(this));
+        listItems.addEventListener('click', this._deleteSelectedNote.bind(this));
     }
 
     _newNote() {
@@ -51,7 +52,8 @@ class App {
     _renderListItem(note) {
         const html = `<li class="list_item" data-id="${note.id}">
         <form class="form" name="notes__form">
-            <input type="text" class="form__title" placeholder="Title...">
+            <button class='button form__button--escape'>X</button>
+            <input name="searchTxt" type="text" class="form__title" placeholder="Title...">
             <textarea
             name=""
             class="form__text"
@@ -73,10 +75,28 @@ class App {
         formTitle = '';
     }
 
-    _showSelectedItem(e) {
-        const el = e.target.closest('.list_item').dataset.id;
+    _saveSelectedNote(e) {
+        e.preventDefault();
+        if (e.target.classList.contains('form__button')) {
+            const el = e.target.closest('.list_item');
 
-        console.log(el);
+            const note = this.#notes.find(listEl => listEl.id === el.dataset.id);
+
+            note.title = el.querySelector('.form__title').value
+            note.text = el.querySelector('.form__text').value
+            console.log(note);
+        }
+        console.log(this.#notes);
+    }
+
+    _deleteSelectedNote(e) {
+        e.preventDefault();
+        if (e.target.classList.contains('form__button--escape')) {
+            const el = e.target.closest('.list_item');
+
+            this.#notes.pop(listEl => listEl.id === el.dataset.id);
+            console.log(this.#notes);
+        }
     }
 }
 
