@@ -31,8 +31,8 @@ class App {
 
     constructor() {
         buttonCreateNewNote.addEventListener('click', this._newNote.bind(this));
-        listItems.addEventListener('click', this._saveSelectedNote.bind(this));
-        listItems.addEventListener('click', this._deleteSelectedNote.bind(this));
+        listItems.addEventListener('click', this._handleNote.bind(this));
+        // listItems.addEventListener('click', this._deleteSelectedNote.bind(this));
     }
 
     _newNote() {
@@ -42,10 +42,9 @@ class App {
 
         // add new note to notes
         this.#notes.push(note);
-        console.log(this.#notes);
+        // console.log(this.#notes);
 
         // save filled inputs
-
 
     }
 
@@ -61,12 +60,11 @@ class App {
             cols="50"
             rows="10" placeholder="Text..."
             ></textarea>
-            <button class="button form__button" type="submit">Save Task</button>
+            <button class="button form__button" type="submit">Save</button>
         </form>
         </li>`;
 
-        listItems.insertAdjacentHTML('beforeend', html);
-
+        listItems.insertAdjacentHTML('afterbegin', html);
     }
 
 
@@ -75,29 +73,34 @@ class App {
         formTitle = '';
     }
 
-    _saveSelectedNote(e) {
+    _handleNote(e) {
         e.preventDefault();
         if (e.target.classList.contains('form__button')) {
+            this._saveSelectedNote(e)
+        }
+        if (e.target.classList.contains('form__button--escape')) {
+            this._deleteSelectedNote(e)
+        }
+    }
+
+    _saveSelectedNote(e) {
             const el = e.target.closest('.list_item');
-
             const note = this.#notes.find(listEl => listEl.id === el.dataset.id);
-
             note.title = el.querySelector('.form__title').value
             note.text = el.querySelector('.form__text').value
-            console.log(note);
-        }
-        console.log(this.#notes);
+            // console.log(note);
+            // console.log(this.#notes);
     }
 
     _deleteSelectedNote(e) {
-        e.preventDefault();
-        if (e.target.classList.contains('form__button--escape')) {
             const el = e.target.closest('.list_item');
-
+            // console.log(el);
             this.#notes.pop(listEl => listEl.id === el.dataset.id);
-            console.log(this.#notes);
-        }
+            // console.log(this.#notes);
+            el.remove();
     }
+
+
 }
 
 const app = new App()
