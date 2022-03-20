@@ -63,8 +63,7 @@ class App {
             cols="50"
             rows="2" placeholder="Text..."
             >${!note.text ? '' : note.text}</textarea>
-            <button class="button form__button" type="submit">
-            <img class="icon__plus" src"img/plus-circle.svg" alt="add new note">
+            <button class="button form__button" type="submit">save
             </button>
         </form>
         </li>`;
