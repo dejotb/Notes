@@ -47,12 +47,12 @@ class App {
         // console.log(this.#notes);
 
         // add data to local storage
-        this._setLocalStorage()
+        // this._setLocalStorage()
 
     }
 
     _renderListItem(note) {
-        const html = `<li class="list_item" data-id="${note.id}">
+        const html = `<li class="list__item" data-id="${note.id}">
         <form class="form" name="notes__form">
             <button class='button form__button--escape'>X</button>
             <input name="searchTxt" type="text" class="form__title" placeholder="Title..." value="${!note.title ? '' : note.title}">
@@ -60,8 +60,9 @@ class App {
             name=""
             class="form__text"
             required=""
-            cols="50"
-            rows="2" placeholder="Text..."
+            cols="15"
+            rows="2"
+             placeholder="Text..."
             >${!note.text ? '' : note.text}</textarea>
             <button class="button form__button" type="submit">save
             </button>
@@ -88,16 +89,20 @@ class App {
     }
 
     _saveSelectedNote(e) {
-            const el = e.target.closest('.list_item');
+            const el = e.target.closest('.list__item');
             const note = this.#notes.find(listEl => listEl.id === el.dataset.id);
             note.title = el.querySelector('.form__title').value
             note.text = el.querySelector('.form__text').value
 
-            this._setLocalStorage()
+            if(note.title || note.text) {
+
+                this._setLocalStorage()
+            }
+
     }
 
     _deleteSelectedNote(e) {
-            const el = e.target.closest('.list_item');
+            const el = e.target.closest('.list__item');
             // console.log(el);
             this.#notes.pop(listEl => listEl.id === el.dataset.id);
             // console.log(this.#notes);
