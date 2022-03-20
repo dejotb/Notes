@@ -77,6 +77,8 @@ button:hover {
 
 button {
   font-family: inherit;
+  background-color: transparent;
+  border: none;
 }
 
 img,
@@ -180,4 +182,12 @@ p:not(:last-child) {
   max-width: 80vw;
   max-height: 30vh;
   background-color: #3696f2;
+}
+
+/* buttons */
+
+.button--cta {
+  background-color: pink;
+  padding: 0;
+  width: 8rem;
 }
