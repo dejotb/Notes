@@ -60,8 +60,9 @@ body {
   height: 100vh;
   width: 100vw;
   background-color: var(--color-blue);
-  display: grid;
-  justify-items: center;
+  margin: 0 auto;
+  /* display: grid; */
+  /* justify-items: center; */
   /* align-items: center; */
 }
 
@@ -134,7 +135,7 @@ p:not(:last-child) {
   margin-bottom: 1rem;
 }
 
-.opacity--half {
+.opacity--none {
   opacity: 0.5;
 }
 
@@ -148,10 +149,17 @@ p:not(:last-child) {
   position: relative;
 }
 
+.main {
+  display: grid;
+  grid-gap: 1rem;
+  justify-items: center;
+}
+
 /* container styling */
 
 .container {
-  width: 99vw;
+  /* background-color: pink; */
+  width: 100vw;
   /* height: 90vh; */
   /* padding: 2rem; */
   /* overflow-y: scroll; */
@@ -172,8 +180,9 @@ p:not(:last-child) {
 
 .list__item {
   display: grid;
-  border: solid var(--color-grey) 4px;
+  border: solid var(--color-grey) 2px;
   border-radius: 5px;
+  transition: 0.5s all;
   /* width: 10%; */
 }
 
@@ -185,7 +194,7 @@ p:not(:last-child) {
 }
 
 .form__title {
-  background-color: #3696f2;
+  background-color: inherit;
   max-width: 40vw;
 }
 
@@ -193,14 +202,46 @@ p:not(:last-child) {
   max-width: 40vw;
   /* max-width: 80vw; */
   /* max-height: 30vh; */
-  background-color: #3696f2;
+  background-color: inherit;
 }
 
 /* buttons */
 
 .button--cta {
-  background-color: pink;
-  padding: 0;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  padding: 0.5rem;
   width: 8rem;
   height: 8rem;
+}
+
+.button--cta {
+  transition: 0.2s all;
+}
+
+.button--cta:hover {
+  transform: rotate(90deg);
+}
+
+/* Footer */
+
+.footer {
+  background-color: yellow;
+}
+
+/* animations */
+
+.fade-out-in {
+  animation: fade 0.5s backwards;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
 }

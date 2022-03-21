@@ -44,8 +44,9 @@ class App {
 
         // add new note to notes
         this.#notes.push(note);
-        // console.log(this.#notes);
 
+        // Animate button
+        this._animateButton()
         // add data to local storage
         // this._setLocalStorage()
 
@@ -131,9 +132,18 @@ class App {
         location.reload();
       }
 
+      _animateButton() {
+        const iconPlus = buttonCreateNewNote.querySelector("#icon__plus");
+        iconPlus.classList.add('fade-out-in');
+        setTimeout(() => {
+        iconPlus.classList.remove('fade-out-in')
+        }, 200);
+      }
+
 
 
 
 }
 
 const app = new App()
+
