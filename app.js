@@ -40,7 +40,6 @@ class App {
     _newNote() {
         // create new note
         const note = new Note();
-        this._renderListItem(note)
 
         // add new note to notes
         this.#notes.push(note);
@@ -50,6 +49,7 @@ class App {
         // add data to local storage
         // this._setLocalStorage()
 
+        this._renderListItem(note)
     }
 
     _renderListItem(note) {
@@ -96,7 +96,6 @@ class App {
             note.text = el.querySelector('.form__text').value
 
             if(note.title || note.text) {
-
                 this._setLocalStorage()
             }
 
@@ -135,9 +134,11 @@ class App {
       _animateButton() {
         const iconPlus = buttonCreateNewNote.querySelector("#icon__plus");
         iconPlus.classList.add('fade-out-in');
+        buttonCreateNewNote.classList.add('hover');
         setTimeout(() => {
-        iconPlus.classList.remove('fade-out-in')
-        }, 200);
+        iconPlus.classList.remove('fade-out-in');
+        buttonCreateNewNote.classList.remove('hover');
+        }, 500);
       }
 
 
