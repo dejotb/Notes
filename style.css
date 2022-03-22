@@ -14,7 +14,7 @@
   --color-blue: #0074d9;
   --color-red: #db3445;
   --color-white: #ffffff;
-  --color-grey: #363636;
+  --color-grey: 54, 54, 54;
   --z-index-negative: -1;
   --z-index-box: 1000;
   --z-index-popup: 1100;
@@ -136,7 +136,7 @@ p:not(:last-child) {
 }
 
 .opacity--none {
-  opacity: 0.5;
+  opacity: 0;
 }
 
 .opacity--full {
@@ -180,7 +180,7 @@ p:not(:last-child) {
 
 .list__item {
   display: grid;
-  border: solid var(--color-grey) 2px;
+  border: solid rgba(var(--color-grey), 0.5) 2px;
   border-radius: 5px;
   transition: 0.5s all;
   /* width: 10%; */
@@ -255,4 +255,19 @@ p:not(:last-child) {
   50% {
     transform: scale(0.9);
   }
+}
+
+/* modal form */
+
+.modal {
+  position: fixed;
+  background-color: rgba(var(--color-grey), 0.8);
+  inset: 0;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.modal__container {
 }
