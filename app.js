@@ -24,6 +24,8 @@ const formTitle = document.querySelector('.form__title');
 const formText = document.querySelector('.form__text');
 const listItems = document.querySelector('.list__items');
 const buttonCreateNewNote = document.querySelector('.button--cta');
+const modalContainer = document.querySelector('.modal__container');
+const modalInput = document.querySelector('.modal__input');
 
 
 class App {
@@ -32,6 +34,7 @@ class App {
     constructor() {
         buttonCreateNewNote.addEventListener('click', this._newNote.bind(this));
         listItems.addEventListener('click', this._handleNote.bind(this));
+        modalInput.addEventListener('click', this._handleNote.bind(this));
 
         // Get data from local storage
         this._getLocalStorage();
@@ -41,18 +44,75 @@ class App {
         // create new note
         const note = new Note();
 
+        // insert a note to input form
+        // this._editNote(note)
         // add new note to notes
         this.#notes.push(note);
+
 
         // Animate button
         this._animateButton()
         // add data to local storage
         // this._setLocalStorage()
+        console.log(this.#notes);
+        this._renderFormInputItem(note)
 
-        this._renderListItem(note)
+
     }
 
+    _handleModalNote() {
+
+    }
+
+    // _editNote(note) {
+    //     const html = `
+    //     <button class='button form__button--escape'>X</button>
+    //     <input name="searchTxt" type="text" class="form__title" placeholder="Title..." value="${!note.title ? '' : note.title}">
+    //     <textarea
+    //     name=""
+    //     class="form__main-text"
+    //     required=""
+    //     cols="40"
+    //     rows="15"
+    //      placeholder="Text..."
+    //     >${!note.text ? '' : note.text}</textarea>
+    //     <button class="button form__button" type="submit">save
+    //     </button>
+    //     `
+
+
+
+
+    // }
+
     _renderListItem(note) {
+        const html = `<li class="list__item" data-id="${note.id}">
+        <form class="form" name="notes__form">
+            <button class='button form__button--escape'>X</button>
+            <input name="searchTxt" type="text" class="form__title" placeholder="Title..." value="${!note.title ? '' : note.title}">
+            <textarea
+            name=""
+            class="form__text"
+            required=""
+            cols="15"
+            rows="2"
+             placeholder="Text..."
+            >${!note.text ? '' : note.text}</textarea>
+
+        </form>
+        </li>`;
+
+        listItems.insertAdjacentHTML('afterbegin', html);
+        // modalInput.insertAdjacentHTML('afterbegin', html);
+        // modalContainer.classList.remove('hide');
+
+    }
+
+
+
+
+
+    _renderFormInputItem(note) {
         const html = `<li class="list__item" data-id="${note.id}">
         <form class="form" name="notes__form">
             <button class='button form__button--escape'>X</button>
@@ -70,10 +130,18 @@ class App {
         </form>
         </li>`;
 
-        listItems.insertAdjacentHTML('afterbegin', html);
+        // listItems.insertAdjacentHTML('afterbegin', html);
+        modalInput.insertAdjacentHTML('afterbegin', html);
+        modalContainer.classList.remove('hide');
+
     }
 
-
+    // _renderTexttoItemList(note){
+    //     const html = `
+    //     <li>${note.title}</li>
+    //     `
+    //     listItems.insertAdjacentHTML('afterbegin', html);
+    // }
 
     _clearInput() {
         formTitle = '';
@@ -82,7 +150,9 @@ class App {
     _handleNote(e) {
         e.preventDefault();
         if (e.target.classList.contains('form__button')) {
-            this._saveSelectedNote(e)
+            this._saveSelectedNote(e);
+
+                   console.log(this.#notes);
         }
         if (e.target.classList.contains('form__button--escape')) {
             this._deleteSelectedNote(e)
@@ -95,8 +165,14 @@ class App {
             note.title = el.querySelector('.form__title').value
             note.text = el.querySelector('.form__text').value
 
+            modalInput.textContent = ''
+            modalContainer.classList.add('hide');
+
+            // this._renderTexttoItemList(note);
+            this._renderListItem(note);
+
             if(note.title || note.text) {
-                this._setLocalStorage()
+                this._setLocalStorage();
             }
 
     }

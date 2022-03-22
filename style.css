@@ -135,14 +135,6 @@ p:not(:last-child) {
   margin-bottom: 1rem;
 }
 
-.opacity--none {
-  opacity: 0;
-}
-
-.opacity--full {
-  opacity: 1;
-}
-
 .img {
   transition: 0.2s all ease-in-out;
   height: 100%;
@@ -259,15 +251,30 @@ p:not(:last-child) {
 
 /* modal form */
 
-.modal {
+.modal__container {
   position: fixed;
   background-color: rgba(var(--color-grey), 0.8);
   inset: 0;
   display: grid;
   justify-content: center;
+  opacity: 1;
   align-items: center;
-  display: none;
 }
 
-.modal__container {
+.modal__input {
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: pink;
+  justify-content: center;
+  width: 80vw;
+}
+
+.form__main-text {
+  max-width: 80vw;
+  background-color: inherit;
+}
+
+.hide {
+  opacity: 0;
+  display: none;
 }
