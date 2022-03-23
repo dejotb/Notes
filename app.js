@@ -64,42 +64,25 @@ class App {
 
     }
 
-    // _editNote(note) {
-    //     const html = `
-    //     <button class='button form__button--escape'>X</button>
-    //     <input name="searchTxt" type="text" class="form__title" placeholder="Title..." value="${!note.title ? '' : note.title}">
-    //     <textarea
-    //     name=""
-    //     class="form__main-text"
-    //     required=""
-    //     cols="40"
-    //     rows="15"
-    //      placeholder="Text..."
-    //     >${!note.text ? '' : note.text}</textarea>
-    //     <button class="button form__button" type="submit">save
-    //     </button>
-    //     `
-
-
-
-
-    // }
 
     _renderListItem(note) {
         const html = `<li class="list__item" data-id="${note.id}">
+        <button class='button form__button--escape'>X</button>
+        <h2>${!note.title ? '' : note.title}</h2>
         <form class="form" name="notes__form">
-            <button class='button form__button--escape'>X</button>
-            <input name="searchTxt" type="text" class="form__title" placeholder="Title..." value="${!note.title ? '' : note.title}">
-            <textarea
+        <textarea
             name=""
             class="form__text"
             required=""
-            cols="15"
+
             rows="2"
-             placeholder="Text..."
+             placeholder="Note..."
             >${!note.text ? '' : note.text}</textarea>
 
         </form>
+
+
+
         </li>`;
 
         listItems.insertAdjacentHTML('afterbegin', html);
@@ -108,31 +91,43 @@ class App {
 
     }
 
+    // <form class="form" name="notes__form">
+    // <button class='button form__button--escape'>X</button>
+    // <input name="searchTxt" type="text" class="form__title" placeholder="Title..." value="${!note.title ? '' : note.title}">
+    // <textarea
+    // name=""
+    // class="form__text"
+    // required=""
+    // cols="15"
+    // rows="2"
+    //  placeholder="Text..."
+    // >${!note.text ? '' : note.text}</textarea>
 
+    // </form>
 
 
 
     _renderFormInputItem(note) {
         const html = `<li class="list__item" data-id="${note.id}">
         <form class="form" name="notes__form">
-            <button class='button form__button--escape'>X</button>
-            <input name="searchTxt" type="text" class="form__title" placeholder="Title..." value="${!note.title ? '' : note.title}">
+        <button class="button button__form--save--exit" type="submit">◀️</button>
+            <input name="searchTxt" type="text" class="form__title" placeholder="Name..." value="${!note.title ? '' : note.title}">
             <textarea
             name=""
             class="form__text"
             required=""
-            cols="15"
-            rows="2"
-             placeholder="Text..."
+
+            rows="10"
+             placeholder="Note..."
             >${!note.text ? '' : note.text}</textarea>
-            <button class="button form__button" type="submit">save
-            </button>
+
         </form>
         </li>`;
 
         // listItems.insertAdjacentHTML('afterbegin', html);
         modalInput.insertAdjacentHTML('afterbegin', html);
         modalContainer.classList.remove('hide');
+        document.querySelector('.form__text').focus();
 
     }
 
@@ -149,7 +144,7 @@ class App {
 
     _handleNote(e) {
         e.preventDefault();
-        if (e.target.classList.contains('form__button')) {
+        if (e.target.classList.contains('button__form--save--exit')) {
             this._saveSelectedNote(e);
 
                    console.log(this.#notes);

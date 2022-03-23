@@ -135,6 +135,10 @@ p:not(:last-child) {
   margin-bottom: 1rem;
 }
 
+h2 {
+  font-size: 2rem;
+}
+
 .img {
   transition: 0.2s all ease-in-out;
   height: 100%;
@@ -181,19 +185,16 @@ p:not(:last-child) {
 .form {
   display: grid;
   grid-gap: 0.5rem;
-  /* min-width: 100%; */
-  /* max-width: 10rem; */
 }
 
 .form__title {
   background-color: inherit;
-  max-width: 40vw;
+  max-width: 80vw;
 }
 
 .form__text {
-  max-width: 40vw;
-  /* max-width: 80vw; */
-  /* max-height: 30vh; */
+  max-width: 80vw;
+
   background-color: inherit;
 }
 
@@ -206,10 +207,11 @@ p:not(:last-child) {
   padding: 0.5rem;
   width: 8rem;
   height: 8rem;
+  transition: 0.2s all;
 }
 
-.button--cta {
-  transition: 0.2s all;
+.button__form--save--exit {
+  justify-self: start;
 }
 
 .hover {
@@ -264,14 +266,9 @@ p:not(:last-child) {
 .modal__input {
   display: grid;
   grid-template-columns: 1fr;
-  background-color: pink;
+  background-color: var(--color-blue);
   justify-content: center;
   width: 80vw;
-}
-
-.form__main-text {
-  max-width: 80vw;
-  background-color: inherit;
 }
 
 .hide {
