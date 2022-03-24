@@ -87,6 +87,8 @@ class App {
 
         </li>`;
 
+        if(!note.title && !note.text) return
+
         listItems.insertAdjacentHTML('afterbegin', html);
         // modalInput.insertAdjacentHTML('afterbegin', html);
         // modalContainer.classList.remove('hide');
