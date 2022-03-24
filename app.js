@@ -81,7 +81,6 @@ class App {
             >${!note.text ? '' : note.text}</textarea>
 
         </form>
-        <button class='button form__button--escape'>X</button>
 
 
 
@@ -95,26 +94,10 @@ class App {
 
     }
 
-    // <form class="form" name="notes__form">
-    // <button class='button form__button--escape'>X</button>
-    // <input name="searchTxt" type="text" class="form__title" placeholder="Title..." value="${!note.title ? '' : note.title}">
-    // <textarea
-    // name=""
-    // class="form__text"
-    // required=""
-    // cols="15"
-    // rows="2"
-    //  placeholder="Text..."
-    // >${!note.text ? '' : note.text}</textarea>
-
-    // </form>
-
-
-
     _renderFormInputItem(note) {
         const html = `<li class="list__item" data-id="${note.id}">
         <form class="form" name="notes__form">
-            <button class="button button__form--save--exit" type="submit">◀️</button>
+            <button class="button button__form--save--exit" type="submit" title="return">◀️</button>
             <input name="searchTxt" type="text" class="form__title" placeholder="Name..." value="${!note.title ? '' : note.title}"/>
             <textarea
             name=""
@@ -127,6 +110,7 @@ class App {
 
         </form>
 
+        <button class='button form__button--escape' title="delete">🗑️</button>
         </li>`;
 
         // listItems.insertAdjacentHTML('afterbegin', html);
@@ -157,19 +141,19 @@ class App {
             this._deleteSelectedNote(e)
         }
 
-        // if (e.currentTarget.classList.contains('list__items')) {
-        //     const el = e.target.closest('.list__item');
-        //     const note = this.#notes.find(listEl => listEl.id === el.dataset.id);
-        //     console.log(el.querySelector('.form__title'));
-        //     this._renderFormInputItem(note)
+        if (e.currentTarget.classList.contains('list__items')) {
+            const el = e.target.closest('.list__item');
+            const note = this.#notes.find(listEl => listEl.id === el.dataset.id);
+            console.log(el.querySelector('.form__title'));
+            this._renderFormInputItem(note)
 
 
-        //     if(note.title || note.text) {
-        //         this._setLocalStorage();
-        //     }
-        //     console.log(this.#notes);
-        //     console.log(note);
-        // }
+            if(note.title || note.text) {
+                this._setLocalStorage();
+            }
+            console.log(this.#notes);
+            console.log(note);
+        }
     }
 
     _saveSelectedNote(e) {
@@ -181,28 +165,36 @@ class App {
             modalInput.textContent = ''
             modalContainer.classList.add('hide');
 
-            // this._renderTexttoItemList(note);
             this._renderListItem(note);
 
+            // remove note from notes array if input is empty
+            if(!note.title && !note.text) {
+            this.#notes = this.#notes.filter(listEl => listEl.id !== el.dataset.id)
+            }
+
+            console.log(this.#notes);
             if(note.title || note.text) {
                 this._setLocalStorage();
             }
 
     }
 
-    // _editNote(e) {
-    //     console.log(e.querySelector('.form__text'));
-    // }
-
     _deleteSelectedNote(e) {
             const el = e.target.closest('.list__item');
+            const elId = listItems.querySelector(`[data-id='${el.dataset.id}']`);
             console.log(el);
             this.#notes = this.#notes.filter(listEl => listEl.id !== el.dataset.id);
-            el.remove();
+            // el.remove();
+            console.log(el.dataset.id);
             console.log(this.#notes);
             this._setLocalStorage()
             modalInput.textContent = ''
             modalContainer.classList.add('hide');
+
+            if(!elId) return
+            elId.remove();
+
+
     }
 
     _setLocalStorage() {
