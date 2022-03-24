@@ -124,6 +124,7 @@ class App {
             >${!note.text ? '' : note.text}</textarea>
 
         </form>
+
         </li>`;
 
         // listItems.insertAdjacentHTML('afterbegin', html);
@@ -194,8 +195,7 @@ class App {
     _deleteSelectedNote(e) {
             const el = e.target.closest('.list__item');
             console.log(el);
-            this.#notes.pop(listEl => listEl.id === el.dataset.id);
-            // console.log(this.#notes);
+            this.#notes = this.#notes.filter(listEl => listEl.id !== el.dataset.id);
             el.remove();
             console.log(this.#notes);
             this._setLocalStorage()
