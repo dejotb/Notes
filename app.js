@@ -47,15 +47,18 @@ class App {
         // insert a note to input form
         // this._editNote(note)
         // add new note to notes
-        this.#notes.push(note);
 
+        this.#notes.push(note);
+        this._renderFormInputItem(note)
 
         // Animate button
         this._animateButton()
         // add data to local storage
         // this._setLocalStorage()
-        this._renderFormInputItem(note)
         console.log(this.#notes);
+
+
+        // this._renderListItem(note);
 
     }
 
@@ -162,14 +165,12 @@ class App {
             note.title = el.querySelector('.form__title').value
             note.text = el.querySelector('.form__text').value
 
-            modalInput.textContent = ''
-            modalContainer.classList.add('hide');
 
-            this._renderListItem(note);
+
 
             // remove note from notes array if input is empty
             if(!note.title && !note.text) {
-            this.#notes = this.#notes.filter(listEl => listEl.id !== el.dataset.id)
+                this.#notes = this.#notes.filter(listEl => listEl.id !== el.dataset.id)
             }
 
             console.log(this.#notes);
@@ -177,6 +178,22 @@ class App {
                 this._setLocalStorage();
             }
 
+            modalInput.textContent = ''
+            listItems.textContent = ''
+            modalContainer.classList.add('hide');
+
+
+            this._getLocalStorage();
+
+
+                  // check if a note is already rendered in the DOM
+                  if([...listItems.children].some(listEl => listEl.dataset.id === note.id)) {
+                    return
+                }
+                else {
+                    console.log('jeszcze ni mo');
+                    this._renderListItem(note);
+                }
     }
 
     _deleteSelectedNote(e) {
@@ -211,6 +228,7 @@ class App {
         this.#notes.forEach(note => {
           this._renderListItem(note);
         });
+        console.log('got local storage');
       }
 
       reset() {
