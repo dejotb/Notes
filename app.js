@@ -52,19 +52,10 @@ class App {
 
   _renderListItem(note) {
     const html = `
-        <li class="list__item" data-id="${note.id}">
+        <li class="list__item list__item--rendered" data-id="${note.id}">
             <h2>${!note.title ? '' : note.title}</h2>
-            <form class="form" name="notes__form">
-                <textarea
-                    name=""
-                    class="form__text"
-                    required=""
-                    rows="2"
-                    placeholder="Note..."
-                    >${!note.text ? '' : note.text}
-                </textarea>
-
-            </form>
+            <p>${!note.text ? '' : note.text}
+            </p>
         </li>`;
 
     if (!note.title && !note.text) return;
@@ -74,18 +65,17 @@ class App {
 
   _renderFormInputItem(note) {
     const html = `
-        <li class="list__item" data-id="${note.id}">
+        <li class="list__item list__item--input" data-id="${note.id}">
+        <button class="button button__form--save--exit" type="submit" title="return">◀️</button>
             <form class="form" name="notes__form">
-                <button class="button button__form--save--exit" type="submit" title="return">◀️</button>
-                <input name="searchTxt" type="text" class="form__title" placeholder="Name..." value="${
+
+                <input maxlength="20" name="title" type="text" class="form__title" placeholder="Name..." value="${
                   !note.title ? '' : note.title
                 }"/>
                 <textarea
                 name=""
                 class="form__text"
                 required=""
-
-                rows="10"
                 placeholder="Note..."
                 >${!note.text ? '' : note.text}</textarea>
             </form>
@@ -151,7 +141,6 @@ class App {
   _deleteSelectedNote(e) {
     const el = e.target.closest('.list__item');
     const elId = listItems.querySelector(`[data-id='${el.dataset.id}']`);
-    console.log(el);
     this.#notes = this.#notes.filter((listEl) => listEl.id !== el.dataset.id);
 
     this._setLocalStorage();
@@ -160,6 +149,8 @@ class App {
 
     if (!elId) return;
     elId.remove();
+
+    console.log(this.#notes);
   }
 
   _setLocalStorage() {

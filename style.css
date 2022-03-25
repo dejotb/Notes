@@ -154,53 +154,82 @@ h2 {
 /* container styling */
 
 .container {
-  /* background-color: pink; */
+  background-color: var(--color-blue);
+  display: grid;
+  min-height: 100vh;
   width: 100vw;
-  /* height: 90vh; */
-  /* padding: 2rem; */
-  /* overflow-y: scroll; */
-  /* background-color: pink; */
-  max-width: 1000px;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .list__items {
-  /* background-color: green; */
   display: grid;
+  /* grid-auto-flow: dense; */
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-auto-rows: minmax(1rem, auto); */
+  grid-gap: 0.5rem;
   justify-content: center;
-  /* grid-template-columns: repeat(auto-fit, minmax(6rem, 10rem)); */
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1rem;
-  padding: 1rem;
-  /* width: 10%; */
+  align-items: flex-start;
+  padding-top: 10rem;
+  /* background-color: pink; */
 }
 
 .list__item {
-  display: grid;
-  border: solid rgba(var(--color-grey), 0.5) 2px;
+  background-color: var(--color-blue);
   border-radius: 5px;
-  transition: 0.5s all;
-  /* width: 10%; */
+  border: 2px solid var(--color-font);
+  /* padding: 1rem 1rem 2rem; */
 }
 
-.form {
-  display: grid;
-  grid-gap: 0.5rem;
+.list__item--rendered {
+  width: 48vw;
+}
+
+.list__item--input {
+  width: 100vw;
+  height: 100vh;
+}
+
+.list__item h2 {
+  color: black;
+  text-align: center;
+  font-size: 1.7rem;
+}
+
+.list__item p,
+.list__item textarea {
+  width: 100%;
+
+  padding: 0.5rem;
+  overflow-y: scroll;
+  background-color: inherit;
+}
+
+.list__item p {
+  max-height: 10rem;
+}
+
+.list__item textarea {
+  outline: none;
+  resize: none;
+  background-color: green;
+  /* max-height: 100rem; */
 }
 
 .form__title {
   background-color: inherit;
-  max-width: 80vw;
 }
 
 .form__text {
-  max-width: 80vw;
+  /* max-width: 80vw;
 
-  background-color: inherit;
+  background-color: inherit; */
 }
 
 /* buttons */
 
 .button--cta {
+  position: fixed;
   display: grid;
   justify-items: center;
   align-items: center;
@@ -257,18 +286,28 @@ h2 {
   position: fixed;
   background-color: rgba(var(--color-grey), 0.8);
   inset: 0;
-  display: grid;
+  display: flex;
   justify-content: center;
-  opacity: 1;
   align-items: center;
+  opacity: 1;
 }
 
 .modal__input {
-  display: grid;
-  grid-template-columns: 1fr;
+  /* width: 47rem;
   background-color: var(--color-blue);
+  border-radius: 5px;
+  padding: 1.5rem 1.5rem 3rem; */
+
+  /* display: grid;
+  grid-template-columns: 1fr;
   justify-content: center;
-  width: 80vw;
+  width: 80vw; */
+}
+
+.form__title {
+  /* font-size: 2rem;
+  color: var(--color-primary);
+  text-align: center; */
 }
 
 .hide {
