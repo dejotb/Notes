@@ -67,7 +67,7 @@ class App {
     const html = `
         <li class="list__item list__item--input" data-id="${note.id}">
         <button class="button button__form--save--exit" type="submit" title="return">◀️</button>
-            <form class="form" name="notes__form">
+        <form class="form" name="notes__form">
 
                 <input maxlength="20" name="title" type="text" class="form__title" placeholder="Name..." value="${
                   !note.title ? '' : note.title
