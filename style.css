@@ -221,6 +221,7 @@ h2 {
 }
 
 .form__text {
+  max-height: 40vh;
   /* max-width: 80vw;
 
   background-color: inherit; */
