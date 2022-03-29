@@ -216,7 +216,8 @@ h2 {
   /* border-radius: 1rem; */
   margin-top: 1rem;
   border: 1px solid pink;
-  height: 80vh;
+  min-height: 50vh;
+  max-height: 80vh;
 }
 
 textarea:is(:focus, :valid) {
