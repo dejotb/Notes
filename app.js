@@ -84,6 +84,8 @@ class App {
     modalInput.insertAdjacentHTML('afterbegin', html);
     modalContainer.classList.remove('hide');
     document.querySelector('.form__text').focus();
+    // const textarea = document.querySelector('textarea');
+    // this._resizeTextArea(textarea);
   }
 
   _handleNote(e) {
@@ -183,6 +185,14 @@ class App {
       buttonCreateNewNote.classList.remove('hover');
     }, 500);
   }
+
+  // _resizeTextArea(textarea) {
+  //   textarea.addEventListener('keyup', (e) => {
+  //     const scrlHeight = e.target.scrollHeight;
+  //     textarea.style.height = '110px';
+  //     textarea.style.height = `${scrlHeight}px`;
+  //   });
+  // }
 }
 
 const app = new App();
