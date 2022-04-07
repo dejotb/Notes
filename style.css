@@ -211,11 +211,8 @@ h2 {
 .list__item textarea {
   outline: none;
   resize: none;
-  /* background-color: green; */
   padding: 1rem;
-  /* border-radius: 1rem; */
   margin-top: 1rem;
-  border: 1px solid pink;
   min-height: 50vh;
   max-height: 80vh;
 }
