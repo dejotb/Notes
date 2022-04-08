@@ -61,9 +61,6 @@ body {
   width: 100vw;
   background-color: var(--color-blue);
   margin: 0 auto;
-  /* display: grid; */
-  /* justify-items: center; */
-  /* align-items: center; */
 }
 
 ::selection {
@@ -164,9 +161,7 @@ h2 {
 
 .list__items {
   display: grid;
-  /* grid-auto-flow: dense; */
   grid-template-columns: repeat(2, 1fr);
-  /* grid-auto-rows: minmax(1rem, auto); */
   grid-gap: 0.5rem;
   justify-content: center;
   align-items: flex-start;
@@ -177,7 +172,6 @@ h2 {
   background-color: var(--color-blue);
   border-radius: 4px;
   border: 2px solid var(--color-font);
-  /* padding: 1rem 1rem 2rem; */
 }
 
 .list__item--rendered {
@@ -186,7 +180,6 @@ h2 {
 
 .list__item--input {
   width: 95vw;
-  /* height: 100vh; */
 }
 
 .list__item h2 {
@@ -217,13 +210,13 @@ h2 {
   max-height: 80vh;
 }
 
-textarea:is(:focus, :valid) {
+/* textarea:is(:focus, :valid) {
   border-color: #07793d;
 }
 
 textarea::-webkit-scrollbar {
   width: 0px;
-}
+} */
 
 .form__title {
   background-color: inherit;
@@ -294,7 +287,7 @@ textarea::-webkit-scrollbar {
 
 .modal__container {
   position: fixed;
-  background-color: rgba(var(--color-grey), 0.8);
+  background-color: rgba(var(--color-grey), 0.55);
   inset: 0;
   display: flex;
   justify-content: center;
