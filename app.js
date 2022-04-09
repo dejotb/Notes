@@ -5,7 +5,8 @@ class Note {
 
   id = `${new Date().getTime()}`.slice(-10);
 
-  constructor(title, text) {
+  constructor(color, title, text) {
+    this.color = color;
     this.title = title; // input title
     this.text = text; // input text
   }
@@ -34,7 +35,7 @@ class App {
 
   _newNote() {
     // create new note
-    const note = new Note();
+    const note = new Note(this._getRandomBackgroundColor(0, 6));
 
     // Add new note to notes array
     this.#notes.push(note);
@@ -48,11 +49,11 @@ class App {
     console.log(this.#notes);
   }
 
-  _handleModalNote() {}
-
   _renderListItem(note) {
     const html = `
-        <li class="list__item list__item--rendered" data-id="${note.id}">
+        <li class="list__item list__item--rendered" data-id="${
+          note.id
+        }" style='background-color:${note.color};'>
             <h2>${!note.title ? '' : note.title}</h2>
             <p>${!note.text ? '' : note.text}
             </p>
@@ -65,7 +66,9 @@ class App {
 
   _renderFormInputItem(note) {
     const html = `
-        <li class="list__item list__item--input" data-id="${note.id}">
+        <li class="list__item list__item--input" data-id="${
+          note.id
+        }" style='background-color:${note.color};'>
         <form class="form" name="notes__form">
         <button class="button button__form--save--exit" type="submit" title="return">◀️</button>
                 <input maxlength="20" name="title" type="text" class="form__title" placeholder="Name..." value="${
@@ -184,6 +187,20 @@ class App {
       iconPlus.classList.remove('fade-out-in');
       buttonCreateNewNote.classList.remove('hover');
     }, 500);
+  }
+
+  _getRandomBackgroundColor(min, max) {
+    const colors = [
+      '#FAE283',
+      '#D19AC8',
+      '#71CECC',
+      '#87CC3A',
+      '#FA742B',
+      '#C7B287',
+    ];
+
+    const number = Math.floor(Math.random() * (max - min) + min);
+    return colors[number];
   }
 
   // _resizeTextArea(textarea) {
