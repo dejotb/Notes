@@ -51,19 +51,20 @@ class App {
 
   _renderListItem(note) {
     const html = `
-        <li class="list__item list__item--rendered" data-id="${
-          note.id
-        }" style='background-color:rgb(${
+      <li class="list__item list__item--rendered" data-id="${
+        note.id
+      }" style='background-color:rgb(${
       note.color
     }); color: ${this._darkenRandomColor(note.color, 2.5)}'>
-            <h2 style='color: ${this._darkenRandomColor(note.color, 2.3)}'>${
+        <h2 style='color: ${this._darkenRandomColor(note.color, 2.3)}'>${
       !note.title ? '' : note.title
     }</h2>
-            <p style='scrollbar-color: ${note.color} ${note.color}; '>${
-      !note.text ? '' : note.text
-    }
-            </p>
-        </li>`;
+        <p style='scrollbar-color: ${this._darkenRandomColor(
+          note.color,
+          1.5
+        )} rgb(${note.color}) '>${!note.text ? '' : note.text}
+        </p>
+      </li>`;
 
     if (!note.title && !note.text) return;
 
@@ -75,33 +76,34 @@ class App {
         <li class="list__item list__item--input" data-id="${
           note.id
         }" style='background-color:rgb(${note.color})'>
-        <form class="form" name="notes__form">
-        <button class="button button__form--save--exit" type="submit" title="return">◀️</button>
-                <input style='color: ${this._darkenRandomColor(
-                  note.color,
-                  2.75
-                )}' maxlength="20" name="title" type="text" class="form__title" placeholder="Name..." value="${
+          <button class="button button__form--save--exit" type="submit" title="return">◀️ save</button>
+          <form class="form" name="notes__form">
+
+            <input style='color: ${this._darkenRandomColor(
+              note.color,
+              2.75
+            )}' maxlength="20" name="title" type="text" class="form__title" placeholder="Name..." value="${
       !note.title ? '' : note.title
     }"/>
-                <textarea
-                name=""
-                class="form__text"
-                required=""
-                placeholder="Note..."
-                style='scrollbar-color: var(--color-blue) rgb(${
-                  note.color
-                }); color: ${this._darkenRandomColor(note.color, 2.5)}'>${
-      !note.text ? '' : note.text
-    }</textarea>
-            </form>
-            <button class='button form__button--escape' title="delete">🗑️</button>
+            <textarea
+            name=""
+            class="form__text"
+            required=""
+            placeholder="Note..."
+            style='scrollbar-color: ${this._darkenRandomColor(
+              note.color,
+              1.5
+            )} rgb(${note.color}); color: ${this._darkenRandomColor(
+      note.color,
+      2.5
+    )}'>${!note.text ? '' : note.text}</textarea>
+          </form>
+          <button class='button form__button--escape' title="delete">🗑️ delete</button>
         </li>`;
 
     modalInput.insertAdjacentHTML('afterbegin', html);
     modalContainer.classList.remove('hide');
     document.querySelector('.form__text').focus();
-    // const textarea = document.querySelector('textarea');
-    // this._resizeTextArea(textarea);
   }
 
   _handleNote(e) {
