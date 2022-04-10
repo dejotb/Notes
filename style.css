@@ -1,7 +1,7 @@
 /* BASE STYLES */
 
 :root {
-  --ff-primary: "Lato", sans-serif;
+  --ff-primary: "Roboto", sans-serif;
   --ff-display: "Neuton", serif;
   --fs-xl: clamp(3.5rem, 6vw + 1rem, 5rem);
   --fs-600: clamp(3.25rem, 6vw + 1rem, 4rem);
@@ -53,7 +53,7 @@ html {
 body {
   font-size: calc(15px + 0.2vw);
   font-family: var(--ff-primary);
-  color: var(--color-font);
+  /* color: #969696; */
   font-weight: 400;
   line-height: 1.6;
   text-rendering: optimizeSpeed;
@@ -69,12 +69,12 @@ body {
 }
 
 a:hover,
-button:hover {
+button:hover,
+li:hover {
   cursor: pointer;
 }
 
 button {
-  font-family: inherit;
   background-color: transparent;
   border: none;
 }
@@ -112,7 +112,7 @@ a {
 }
 
 html {
-  /* scrollbar-color: var(--color-blue) #e0e0e0; */
+  scrollbar-color: var(--color-blue) #e0e0e0;
   scrollbar-width: thin;
 }
 
@@ -144,17 +144,17 @@ h2 {
 
 .main {
   display: grid;
-  grid-gap: 1rem;
+  /* grid-gap: 10000rem; */
   justify-items: center;
 }
 
 /* container styling */
 
 .container {
-  background-color: var(--color-blue);
+  /* background-color: var(--color-blue); */
   display: grid;
   min-height: 100vh;
-  width: 100vw;
+  /* width: 90vw; */
   justify-content: center;
   align-items: flex-start;
 }
@@ -162,16 +162,16 @@ h2 {
 .list__items {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 0.5rem;
+  grid-gap: 1rem;
   justify-content: center;
   align-items: flex-start;
   padding-top: 10rem;
 }
 
 .list__item {
-  background-color: var(--color-blue);
   border-radius: 4px;
   border: 2px solid var(--color-font);
+  padding: 0.5rem;
 }
 
 .list__item--rendered {
@@ -184,21 +184,21 @@ h2 {
 
 .list__item h2 {
   color: black;
-  text-align: center;
-  font-size: 1.7rem;
+  /* text-align: center; */
+  font-size: 1.6rem;
 }
 
 .list__item p,
 .list__item textarea {
   width: 100%;
-
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   overflow-y: scroll;
   background-color: inherit;
 }
 
 .list__item p {
-  max-height: 10rem;
+  /* min-height: 9rem; */
+  height: 10rem;
 }
 
 .list__item textarea {
@@ -316,4 +316,26 @@ textarea::-webkit-scrollbar {
 .hide {
   opacity: 0;
   display: none;
+}
+
+/* media queries */
+
+@media screen and (min-width: 700px) {
+  .list__item--rendered {
+    width: 30vw;
+  }
+
+  .list__item--input {
+    width: 70vw;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .list__item--rendered {
+    width: 30vw;
+  }
+
+  .list__item--input {
+    width: 70rem;
+  }
 }

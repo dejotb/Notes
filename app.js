@@ -6,7 +6,7 @@ class Note {
   id = `${new Date().getTime()}`.slice(-10);
 
   constructor(color, title, text) {
-    this.color = color;
+    this.color = color; // item background color
     this.title = title; // input title
     this.text = text; // input text
   }
@@ -35,7 +35,7 @@ class App {
 
   _newNote() {
     // create new note
-    const note = new Note(this._getRandomBackgroundColor(0, 6));
+    const note = new Note(this._getRandomColor(0, 9));
 
     // Add new note to notes array
     this.#notes.push(note);
@@ -53,9 +53,15 @@ class App {
     const html = `
         <li class="list__item list__item--rendered" data-id="${
           note.id
-        }" style='background-color:${note.color};'>
-            <h2>${!note.title ? '' : note.title}</h2>
-            <p>${!note.text ? '' : note.text}
+        }" style='background-color:rgb(${
+      note.color
+    }); color: ${this._darkenRandomColor(note.color, 2.5)}'>
+            <h2 style='color: ${this._darkenRandomColor(note.color, 2.3)}'>${
+      !note.title ? '' : note.title
+    }</h2>
+            <p style='scrollbar-color: ${note.color} ${note.color}; '>${
+      !note.text ? '' : note.text
+    }
             </p>
         </li>`;
 
@@ -68,18 +74,25 @@ class App {
     const html = `
         <li class="list__item list__item--input" data-id="${
           note.id
-        }" style='background-color:${note.color};'>
+        }" style='background-color:rgb(${note.color})'>
         <form class="form" name="notes__form">
         <button class="button button__form--save--exit" type="submit" title="return">◀️</button>
-                <input maxlength="20" name="title" type="text" class="form__title" placeholder="Name..." value="${
-                  !note.title ? '' : note.title
-                }"/>
+                <input style='color: ${this._darkenRandomColor(
+                  note.color,
+                  2.75
+                )}' maxlength="20" name="title" type="text" class="form__title" placeholder="Name..." value="${
+      !note.title ? '' : note.title
+    }"/>
                 <textarea
                 name=""
                 class="form__text"
                 required=""
                 placeholder="Note..."
-                >${!note.text ? '' : note.text}</textarea>
+                style='scrollbar-color: var(--color-blue) rgb(${
+                  note.color
+                }); color: ${this._darkenRandomColor(note.color, 2.5)}'>${
+      !note.text ? '' : note.text
+    }</textarea>
             </form>
             <button class='button form__button--escape' title="delete">🗑️</button>
         </li>`;
@@ -174,10 +187,10 @@ class App {
     console.log('got local storage');
   }
 
-  reset() {
-    localStorage.removeItem('workouts');
-    location.reload();
-  }
+  // reset() {
+  //   localStorage.removeItem('workouts');
+  //   location.reload();
+  // }
 
   _animateButton() {
     const iconPlus = buttonCreateNewNote.querySelector('#icon__plus');
@@ -189,27 +202,38 @@ class App {
     }, 500);
   }
 
-  _getRandomBackgroundColor(min, max) {
+  _getRandomColor(min, max) {
     const colors = [
-      '#FAE283',
-      '#D19AC8',
-      '#71CECC',
-      '#87CC3A',
-      '#FA742B',
-      '#C7B287',
+      '250,226,131',
+      '209,154,200',
+      '113,206,204',
+      '135,204,58',
+      '68,68,68',
+      '199,178,135',
+      '211,212,233',
+      '241,207,48',
+      '250,205,199',
+      // '#FAE283',
+      // '#D19AC8',
+      // '#71CECC',
+      // '#87CC3A',
+      // '#FA742B',
+      // '#C7B287',
+      // '#D3D4E9',
+      // '#F1CF30',
+      // '#FACDC7',
     ];
 
     const number = Math.floor(Math.random() * (max - min) + min);
     return colors[number];
   }
 
-  // _resizeTextArea(textarea) {
-  //   textarea.addEventListener('keyup', (e) => {
-  //     const scrlHeight = e.target.scrollHeight;
-  //     textarea.style.height = '110px';
-  //     textarea.style.height = `${scrlHeight}px`;
-  //   });
-  // }
+  _darkenRandomColor(inputColor, factor) {
+    return `rgb(${inputColor
+      .split(',')
+      .map((color) => color - (255 - color) * factor)
+      .join(',')})`;
+  }
 }
 
 const app = new App();
