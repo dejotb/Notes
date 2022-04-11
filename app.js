@@ -76,7 +76,7 @@ class App {
         <li class="list__item list__item--input" data-id="${
           note.id
         }" style='background-color:rgb(${note.color})'>
-          <button class="button button__form--save--exit" type="submit" title="return">◀️ save</button>
+          <button class="button button__form--save--exit" type="submit" title="save"> <img src="img/arrow.svg" alt="save note"></button>
           <form class="form" name="notes__form">
 
             <input style='color: ${this._darkenRandomColor(
@@ -98,7 +98,7 @@ class App {
       2.5
     )}'>${!note.text ? '' : note.text}</textarea>
           </form>
-          <button class='button form__button--escape' title="delete">🗑️ delete</button>
+          <button class='button button__form--delete' title="delete"><img src="img/bin.svg" alt="delete note"></button>
         </li>`;
 
     modalInput.insertAdjacentHTML('afterbegin', html);
@@ -108,11 +108,11 @@ class App {
 
   _handleNote(e) {
     e.preventDefault();
-    if (e.target.classList.contains('button__form--save--exit')) {
+    if (e.target.closest('.button__form--save--exit')) {
       this._saveSelectedNote(e);
     }
 
-    if (e.target.classList.contains('form__button--escape')) {
+    if (e.target.closest('.button__form--delete')) {
       this._deleteSelectedNote(e);
     }
 
