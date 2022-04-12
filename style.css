@@ -156,6 +156,8 @@ h2 {
   /* width: 90vw; */
   justify-content: center;
   align-items: flex-start;
+  /* opacity: 0; */
+  transition: opacity 0.5s;
 }
 
 .list__items {
@@ -168,10 +170,13 @@ h2 {
 }
 
 .list__item {
+  display: flex;
+  flex-direction: column;
   border-radius: 14px;
   /* border: 2px solid var(--color-font); */
   padding: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  transition: opacity 10s;
 }
 
 .list__item--rendered {
@@ -185,12 +190,13 @@ h2 {
 .list__item h2 {
   /* text-align: center; */
   font-size: 1.7rem;
+  padding-left: 0.5rem;
 }
 
 .list__item p,
 .list__item textarea {
   width: 100%;
-  /* padding: 0.5rem; */
+  padding: 0.5rem;
   overflow-y: scroll;
   background-color: inherit;
 }
@@ -201,26 +207,19 @@ h2 {
 }
 
 .list__item textarea {
-  outline: none;
   resize: none;
-  padding: 1rem;
-  margin-top: 1rem;
   min-height: 50vh;
   max-height: 80vh;
 }
 
-/* textarea:is(:focus, :valid) {
-  border-color: #07793d;
-}
-
-textarea::-webkit-scrollbar {
-  width: 0px;
-} */
-
-.form__title {
+.form__title,
+.list__item textarea {
   background-color: inherit;
   padding: 1rem;
   outline: none;
+}
+
+.form__title {
 }
 
 .form__text {
@@ -245,8 +244,8 @@ textarea::-webkit-scrollbar {
 
 .button__form--delete,
 .button__form--save--exit {
-  justify-self: start;
   height: auto;
+  margin: 0.5rem;
 }
 
 .button__form--save--exit {
@@ -255,6 +254,7 @@ textarea::-webkit-scrollbar {
 
 .button__form--delete {
   width: 2.5rem;
+  align-self: flex-end;
 }
 
 /* .button__form--save--exi img {
@@ -331,6 +331,7 @@ textarea::-webkit-scrollbar {
 .hide {
   opacity: 0;
   display: none;
+  transition: opacity 1s;
 }
 
 /* media queries */

@@ -47,6 +47,8 @@ class App {
     this._animateButton();
 
     console.log(this.#notes);
+
+    container.style.opacity = 0;
   }
 
   _renderListItem(note) {
@@ -108,6 +110,7 @@ class App {
 
   _handleNote(e) {
     e.preventDefault();
+
     if (e.target.closest('.button__form--save--exit')) {
       this._saveSelectedNote(e);
     }
@@ -118,9 +121,14 @@ class App {
 
     if (e.currentTarget.classList.contains('list__items')) {
       const el = e.target.closest('.list__item');
+
+      if (!el) {
+        return;
+      }
+
+      container.style.opacity = 0;
       const note = this.#notes.find((listEl) => listEl.id === el.dataset.id);
       this._renderFormInputItem(note);
-
       if (note.title || note.text) {
         this._setLocalStorage();
       }
@@ -132,6 +140,7 @@ class App {
     const note = this.#notes.find((listEl) => listEl.id === el.dataset.id);
     note.title = el.querySelector('.form__title').value;
     note.text = el.querySelector('.form__text').value;
+    container.style.opacity = 1;
 
     // remove note from notes array if input is empty
     if (!note.title && !note.text) {
@@ -161,6 +170,7 @@ class App {
     const el = e.target.closest('.list__item');
     const elId = listItems.querySelector(`[data-id='${el.dataset.id}']`);
     this.#notes = this.#notes.filter((listEl) => listEl.id !== el.dataset.id);
+    container.style.opacity = 1;
 
     this._setLocalStorage();
     modalInput.textContent = '';
