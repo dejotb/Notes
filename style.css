@@ -52,6 +52,10 @@ html {
 }
 
 body {
+  display: grid;
+  align-items: flex-start;
+  align-content: flex-start;
+  grid-gap: 3rem;
   font-size: calc(15px + 0.2vw);
   font-family: var(--ff-primary);
   /* color: #969696; */
@@ -143,15 +147,20 @@ h2 {
 
 .main {
   display: grid;
-  /* grid-gap: 10000rem; */
+  grid-gap: 1rem;
   justify-items: center;
   /* align-items: flex-start; */
 }
 
 .logo {
-  margin-top: 1rem;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  /* margin-top: 1rem; */
   width: 10rem;
   height: auto;
+  /* justify-self: center; */
+  /* margin: 1rem auto; */
 }
 
 /* container styling */
@@ -173,7 +182,7 @@ h2 {
   grid-gap: 1rem;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 2rem;
+  /* padding-top: 2rem; */
 }
 
 .list__item {
@@ -239,18 +248,19 @@ h2 {
 /* buttons */
 
 .button--cta {
-  position: fixed;
+  /* position: fixed; */
   display: grid;
-  justify-items: center;
-  align-items: center;
-  /* margin-top: 5rem; */
+  margin-top: 1rem;
+  /* justify-items: center;
+  align-items: center; */
+  /* margin-top: 1rem; */
   /* padding: 0.5rem; */
   width: 7rem;
   height: 7rem;
   transition: 0.2s all;
-  bottom: 2rem;
-  right: 3rem;
-  z-index: 90;
+  /* bottom: 2rem; */
+  /* right: 3rem; */
+  z-index: 9;
 }
 
 .button__form--delete,
@@ -356,16 +366,11 @@ h2 {
   .list__item--input {
     width: 70vw;
   }
-
-  .button--cta {
-    right: 50%;
-    transform: translate(50%);
-  }
 }
 
 @media screen and (min-width: 1000px) {
   .list__item--rendered {
-    width: 30vw;
+    width: 25vw;
   }
 
   .list__item--input {

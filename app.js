@@ -105,7 +105,7 @@ class App {
 
     modalInput.insertAdjacentHTML('afterbegin', html);
     modalContainer.classList.remove('hide');
-    document.querySelector('.form__text').focus();
+    // document.querySelector('.form__text').focus();
   }
 
   _handleNote(e) {
