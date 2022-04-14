@@ -2,7 +2,7 @@
 
 :root {
   --ff-primary: "Roboto", sans-serif;
-  --ff-display: "Neuton", serif;
+  --ff-display: "Beau Rivage", cursive;
   --fs-xl: clamp(3.5rem, 6vw + 1rem, 5rem);
   --fs-600: clamp(3.25rem, 6vw + 1rem, 4rem);
   --fs-500: 2rem;
@@ -54,7 +54,6 @@ html {
 body {
   display: grid;
   align-items: flex-start;
-  align-content: flex-start;
   grid-gap: 3rem;
   font-size: calc(15px + 0.2vw);
   font-family: var(--ff-primary);
@@ -152,16 +151,14 @@ h2 {
   /* align-items: flex-start; */
 }
 
-.logo {
+/* .logo {
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  /* margin-top: 1rem; */
   width: 6rem;
   height: auto;
-  /* justify-self: center; */
-  /* margin: 1rem auto; */
-}
+
+} */
 
 /* container styling */
 
@@ -290,7 +287,14 @@ h2 {
 /* Footer */
 
 .footer {
-  background-color: yellow;
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+  color: #d6e5e5;
+  font-family: var(--ff-display);
+  /* background-color: yellow; */
+
+  align-self: flex-end;
 }
 
 /* animations */
