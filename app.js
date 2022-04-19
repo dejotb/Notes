@@ -75,11 +75,7 @@ class App {
   }
 
   _renderFormInputItem(note) {
-    let html = ``;
-
-    if (document.querySelector('#selected-note').checked) {
-      console.log('note');
-      html = `
+    const html = `
       <li class="list__item list__item--input" data-id="${
         note.id
       }" style='background-color:rgb(${note.color})'>
@@ -90,8 +86,8 @@ class App {
             note.color,
             2.75
           )}' maxlength="20" name="title" type="text" class="form__title" placeholder="Name..." value="${
-        !note.title ? '' : note.title
-      }"/>
+      !note.title ? '' : note.title
+    }"/>
           <textarea
           name=""
           class="form__text"
@@ -101,45 +97,12 @@ class App {
             note.color,
             1.5
           )} rgb(${note.color}); color: ${this._darkenRandomColor(
-        note.color,
-        2.5
-      )}'>${!note.text ? '' : note.text}</textarea>
+      note.color,
+      2.5
+    )}'>${!note.text ? '' : note.text}</textarea>
         </form>
         <button class='button button__form--delete' title="delete"><img src="img/bin.svg" alt="delete note"></button>
       </li>`;
-    }
-
-    if (document.querySelector('#selected-list').checked) {
-      console.log('list');
-      html = `
-      <li class="list__item list__item--input" data-id="${
-        note.id
-      }" style='background-color:rgb(${note.color})'>
-        <button class="button button__form--save--exit" type="submit" title="save"> <img src="img/arrow.svg" alt="save note"></button>
-        <form class="form" name="notes__form">
-
-          <input style='color: ${this._darkenRandomColor(
-            note.color,
-            2.75
-          )}' maxlength="20" name="title" type="text" class="form__title" placeholder="Name..." value="${
-        !note.title ? '' : note.title
-      }"/>
-          <textarea
-          name=""
-          class="form__text"
-          required=""
-          placeholder="Note..."
-          style='scrollbar-color: ${this._darkenRandomColor(
-            note.color,
-            1.5
-          )} rgb(${note.color}); color: ${this._darkenRandomColor(
-        note.color,
-        2.5
-      )}'>${!note.text ? '' : note.text}</textarea>
-        </form>
-        <button class='button button__form--delete' title="delete"><img src="img/bin.svg" alt="delete note"></button>
-      </li>`;
-    }
 
     modalInput.insertAdjacentHTML('afterbegin', html);
     modalContainer.classList.remove('hide');

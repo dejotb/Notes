@@ -237,11 +237,11 @@ h2 {
   height: 10rem;
 }
 
-.list__item textarea {
+/* .list__item .form__text {
   resize: none;
   min-height: 50vh;
   max-height: 80vh;
-}
+} */
 
 .form__title,
 .list__item textarea {
@@ -254,11 +254,16 @@ h2 {
 }
 
 .form__text {
-  /* max-height: 40vh; */
-  /* max-width: 80vw;
-
-  background-color: inherit; */
+  resize: none;
+  min-height: 50vh;
+  max-height: 80vh;
 }
+
+/* .form__list-item {
+  resize: none;
+  max-height: 10vh;
+  background-color: red;
+} */
 
 /* buttons */
 
