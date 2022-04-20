@@ -53,8 +53,8 @@ html {
 
 body {
   display: grid;
-  align-items: flex-start;
-  grid-gap: 3rem;
+  /* align-content: start; */
+  grid-gap: 2rem;
   font-size: calc(15px + 0.2vw);
   font-family: var(--ff-primary);
   /* color: #969696; */
@@ -144,29 +144,11 @@ h2 {
   position: relative;
 }
 
-.header {
-  display: grid;
-  grid-auto-flow: column;
-  justify-items: center;
-  align-items: center;
-  /* grid-template-columns: repeat(2, 1fr); */
-  grid-gap: 3rem;
-  position: relative;
-}
-
-.header__inpyt-type {
-  position: absolute;
-  justify-self: center;
-  font-size: 1.5rem;
-  transform: translateX(-10rem);
-  align-self: end;
-}
-
 .main {
   display: grid;
   grid-gap: 1rem;
   justify-items: center;
-  /* align-items: flex-start; */
+  align-items: flex-start;
 }
 
 /* .logo {
@@ -268,7 +250,7 @@ h2 {
 /* buttons */
 
 .button--cta {
-  /* justify-self: center; */
+  justify-self: center;
   display: grid;
   margin-top: 1rem;
   /* justify-items: center;
@@ -310,14 +292,13 @@ h2 {
 /* Footer */
 
 .footer {
+  align-self: end;
   display: flex;
   justify-content: center;
   font-size: 4rem;
   color: #d6e5e5;
   font-family: var(--ff-display);
   /* background-color: yellow; */
-
-  align-self: flex-end;
 }
 
 /* animations */
