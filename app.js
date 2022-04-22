@@ -28,6 +28,7 @@ class App {
     buttonCreateNewNote.addEventListener('click', this._newNote.bind(this));
     listItems.addEventListener('click', this._handleNote.bind(this));
     modalInput.addEventListener('click', this._handleNote.bind(this));
+    modalContainer.addEventListener('click', this._exitSelectedNote.bind(this));
 
     // Get data from local storage
     this._getLocalStorage();
@@ -106,7 +107,6 @@ class App {
 
     modalInput.insertAdjacentHTML('afterbegin', html);
     modalContainer.classList.remove('hide');
-    // document.querySelector('.form__text').focus();
   }
 
   _handleNote(e) {
@@ -133,6 +133,9 @@ class App {
       if (note.title || note.text) {
         this._setLocalStorage();
       }
+    }
+    if (e.currentTarget.classList.contains('modal__container')) {
+      console.log(e.currentTarget);
     }
   }
 
@@ -200,6 +203,14 @@ class App {
     console.log('got local storage');
   }
 
+  _exitSelectedNote(e) {
+    if (!e.target.classList.contains('modal__container')) {
+      return;
+    }
+    modalContainer.classList.add('hide');
+    modalInput.textContent = '';
+    container.style.opacity = 1;
+  }
   // reset() {
   //   localStorage.removeItem('workouts');
   //   location.reload();
