@@ -14,8 +14,8 @@ class Note {
 
 // APPLICATION ARCHITECTURE
 const container = document.querySelector('.container');
-const formTitle = document.querySelector('.form__title');
-const formText = document.querySelector('.form__text');
+// const formTitle = document.querySelector('.form__title');
+// const formText = document.querySelector('.form__text');
 const listItems = document.querySelector('.list__items');
 const buttonCreateNewNote = document.querySelector('.button--cta');
 const modalContainer = document.querySelector('.modal__container');
@@ -27,12 +27,10 @@ class App {
   constructor() {
     buttonCreateNewNote.addEventListener('click', this._newNote.bind(this));
     listItems.addEventListener('click', this._handleNote.bind(this));
-    modalInput.addEventListener('click', this._handleNote.bind(this));
-    modalContainer.addEventListener('click', this._exitSelectedNote.bind(this));
+    modalContainer.addEventListener('click', this._handleNote.bind(this));
 
     // Get data from local storage
     this._getLocalStorage();
-    console.log();
   }
 
   _newNote() {
@@ -112,11 +110,31 @@ class App {
   _handleNote(e) {
     e.preventDefault();
 
+    if (e.target.classList.contains('modal__container')) {
+      // const el = modalInput.querySelector('.list__item');
+      // const note = this.#notes.find((listEl) => listEl.id === el.dataset.id);
+      container.style.opacity = 1;
+      // if (!note.title && !note.text) {
+      //   this.#notes = this.#notes.filter(
+      //     (listEl) => listEl.id !== el.dataset.id
+      //   );
+      // }
+      modalInput.textContent = '';
+      listItems.textContent = '';
+      modalContainer.classList.add('hide');
+      this._getLocalStorage();
+      console.log(this.#notes);
+
+      //! clean code with save method
+    }
+
     if (e.target.closest('.button__form--save--exit')) {
-      this._saveSelectedNote(e);
+      this._saveSelectedNote();
+      // console.log('save');
     }
 
     if (e.target.closest('.button__form--delete')) {
+      console.log(e);
       this._deleteSelectedNote(e);
     }
 
@@ -134,13 +152,14 @@ class App {
         this._setLocalStorage();
       }
     }
-    if (e.currentTarget.classList.contains('modal__container')) {
-      console.log(e.currentTarget);
-    }
+
+    // if (!e.target.classList.contains('modal__container')) {
+    //   return;
+    // }
   }
 
-  _saveSelectedNote(e) {
-    const el = e.target.closest('.list__item');
+  _saveSelectedNote() {
+    const el = modalInput.querySelector('.list__item');
     const note = this.#notes.find((listEl) => listEl.id === el.dataset.id);
     note.title = el.querySelector('.form__title').value;
     note.text = el.querySelector('.form__text').value;
@@ -203,14 +222,6 @@ class App {
     console.log('got local storage');
   }
 
-  _exitSelectedNote(e) {
-    if (!e.target.classList.contains('modal__container')) {
-      return;
-    }
-    modalContainer.classList.add('hide');
-    modalInput.textContent = '';
-    container.style.opacity = 1;
-  }
   // reset() {
   //   localStorage.removeItem('workouts');
   //   location.reload();
