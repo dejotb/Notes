@@ -31,6 +31,9 @@ class App {
 
     // Get data from local storage
     this._getLocalStorage();
+
+    // Show instruction if no notes are added
+    this._showInstruction();
   }
 
   _newNote() {
@@ -49,6 +52,7 @@ class App {
     console.log(this.#notes);
 
     container.style.opacity = 0;
+    document.querySelector('.button--cta-instruction').classList.add('hide');
   }
 
   _renderListItem(note) {
@@ -111,14 +115,7 @@ class App {
     e.preventDefault();
 
     if (e.target.classList.contains('modal__container')) {
-      // const el = modalInput.querySelector('.list__item');
-      // const note = this.#notes.find((listEl) => listEl.id === el.dataset.id);
       container.style.opacity = 1;
-      // if (!note.title && !note.text) {
-      //   this.#notes = this.#notes.filter(
-      //     (listEl) => listEl.id !== el.dataset.id
-      //   );
-      // }
       modalInput.textContent = '';
       listItems.textContent = '';
       modalContainer.classList.add('hide');
@@ -130,7 +127,6 @@ class App {
 
     if (e.target.closest('.button__form--save--exit')) {
       this._saveSelectedNote();
-      // console.log('save');
     }
 
     if (e.target.closest('.button__form--delete')) {
@@ -152,10 +148,6 @@ class App {
         this._setLocalStorage();
       }
     }
-
-    // if (!e.target.classList.contains('modal__container')) {
-    //   return;
-    // }
   }
 
   _saveSelectedNote() {
@@ -268,6 +260,19 @@ class App {
       .split(',')
       .map((color) => color - (255 - color) * factor)
       .join(',')})`;
+  }
+
+  _showInstruction() {
+    if (this.#notes.length) {
+      return;
+    }
+
+    if (this.#notes.length === 0) {
+      setTimeout(() => {
+        const instruction = document.querySelector('.button--cta-instruction');
+        instruction.classList.remove('hide');
+      }, 2000);
+    }
   }
 }
 

@@ -214,6 +214,7 @@ p:not(:last-child) {
 /* buttons */
 
 .button--cta {
+  position: relative;
   justify-self: center;
   display: grid;
   margin-top: 1rem;
@@ -296,6 +297,19 @@ p:not(:last-child) {
   opacity: 0;
   display: none;
   transition: opacity 1s;
+}
+
+.button--cta-instruction {
+  position: absolute;
+  top: 10rem;
+  left: 50%;
+  transform: translate(-20%, 0);
+  width: 15rem;
+  height: 15rem;
+}
+
+.instruction img {
+  /* height: 40vmin; */
 }
 
 /* media queries */
