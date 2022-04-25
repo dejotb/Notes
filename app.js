@@ -268,6 +268,7 @@ class App {
     }
 
     if (this.#notes.length === 0) {
+      console.log(this.#notes);
       setTimeout(() => {
         const instruction = document.querySelector('.button--cta-instruction');
         instruction.classList.remove('hide');

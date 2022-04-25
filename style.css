@@ -305,7 +305,7 @@ p:not(:last-child) {
   left: 50%;
   transform: translate(-20%, 0);
   width: 15rem;
-  height: 15rem;
+  height: auto;
 }
 
 .instruction img {
