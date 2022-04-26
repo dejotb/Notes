@@ -32,13 +32,13 @@ class App {
     // Get data from local storage
     this._getLocalStorage();
 
-    // Show instruction if no notes are added
-    this._showInstruction();
+    // Show instruction
+    this._handleInstructionText();
   }
 
   _newNote() {
     // create new note
-    const note = new Note(this._getRandomColor(0, 9));
+    const note = new Note(this._getRandomColor());
 
     // Add new note to notes array
     this.#notes.push(note);
@@ -52,7 +52,10 @@ class App {
     console.log(this.#notes);
 
     container.style.opacity = 0;
-    document.querySelector('.button--cta-instruction').classList.add('hide');
+
+    if (document.querySelector('.instruction--create')) {
+      document.querySelector('.instruction--create').remove();
+    }
   }
 
   _renderListItem(note) {
@@ -73,7 +76,6 @@ class App {
       </li>`;
 
     if (!note.title && !note.text) return;
-
     listItems.insertAdjacentHTML('afterbegin', html);
   }
 
@@ -109,6 +111,7 @@ class App {
 
     modalInput.insertAdjacentHTML('afterbegin', html);
     modalContainer.classList.remove('hide');
+    this._handleInstructionText();
   }
 
   _handleNote(e) {
@@ -121,12 +124,13 @@ class App {
       modalContainer.classList.add('hide');
       this._getLocalStorage();
       console.log(this.#notes);
-
+      this._handleInstructionText();
       //! clean code with save method
     }
 
     if (e.target.closest('.button__form--save--exit')) {
       this._saveSelectedNote();
+      this._handleInstructionText();
     }
 
     if (e.target.closest('.button__form--delete')) {
@@ -229,27 +233,21 @@ class App {
     }, 500);
   }
 
-  _getRandomColor(min, max) {
+  _getRandomColor(min = 0) {
     const colors = [
       '250,226,131',
       '209,154,200',
       '113,206,204',
       '135,204,58',
-      '68,68,68',
       '199,178,135',
       '211,212,233',
       '241,207,48',
       '250,205,199',
-      // '#FAE283',
-      // '#D19AC8',
-      // '#71CECC',
-      // '#87CC3A',
-      // '#FA742B',
-      // '#C7B287',
-      // '#D3D4E9',
-      // '#F1CF30',
-      // '#FACDC7',
     ];
+
+    const max = colors.length;
+
+    console.log(colors.length);
 
     const number = Math.floor(Math.random() * (max - min) + min);
     return colors[number];
@@ -262,18 +260,42 @@ class App {
       .join(',')})`;
   }
 
-  _showInstruction() {
-    if (this.#notes.length) {
+  _handleInstructionText() {
+    if (this.#notes.length > 1) {
       return;
     }
 
-    if (this.#notes.length === 0) {
-      console.log(this.#notes);
-      setTimeout(() => {
-        const instruction = document.querySelector('.button--cta-instruction');
-        instruction.classList.remove('hide');
-      }, 2000);
+    if (
+      this.#notes.length === 1 &&
+      document.querySelector('.list__item--input')
+    ) {
+      const instructionInputForm = document.querySelector('.list__item--input');
+      this._renderInstructionText('save', instructionInputForm);
+      this._renderInstructionText('delete', instructionInputForm);
     }
+
+    if (
+      this.#notes.length === 1 &&
+      document.querySelector('.list__item--rendered')
+    ) {
+      const instructionEdit = document.querySelector('.list__item--rendered');
+      this._renderInstructionText('edit', instructionEdit);
+    }
+
+    if (this.#notes.length === 0) {
+      this._renderInstructionText('create', document.body);
+    }
+  }
+
+  _renderInstructionText(img, DOMelement) {
+    setTimeout(() => {
+      const html = `
+        <div class="instruction--${img}">
+        <img src="img/instruction__arrow--${img}.png" alt="instruction" />
+      </div>
+        `;
+      DOMelement.insertAdjacentHTML('afterbegin', html);
+    }, 2000);
   }
 }
 

@@ -174,10 +174,12 @@ p:not(:last-child) {
 }
 
 .list__item--rendered {
+  position: relative;
   width: 46vw;
 }
 
 .list__item--input {
+  position: relative;
   width: 95vw;
 }
 
@@ -299,17 +301,40 @@ p:not(:last-child) {
   transition: opacity 1s;
 }
 
-.button--cta-instruction {
+.instruction--create,
+.instruction--edit,
+.instruction--save,
+.instruction--delete {
   position: absolute;
+  height: auto;
+}
+
+.instruction--create {
   top: 10rem;
   left: 50%;
   transform: translate(-20%, 0);
   width: 15rem;
-  height: auto;
 }
 
-.instruction img {
-  /* height: 40vmin; */
+.instruction--edit {
+  bottom: -12rem;
+  left: 2rem;
+  /* transform: translate(-20%, 0); */
+  width: 25rem;
+}
+
+.instruction--save {
+  top: -6rem;
+  left: 3rem;
+  /* transform: translate(-20%, 0); */
+  width: 25rem;
+}
+
+.instruction--delete {
+  bottom: -6rem;
+  right: 3rem;
+  /* transform: translate(-20%, 0); */
+  width: 18rem;
 }
 
 /* media queries */
