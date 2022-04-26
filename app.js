@@ -118,13 +118,14 @@ class App {
     e.preventDefault();
 
     if (e.target.classList.contains('modal__container')) {
-      container.style.opacity = 1;
-      modalInput.textContent = '';
-      listItems.textContent = '';
-      modalContainer.classList.add('hide');
-      this._getLocalStorage();
-      console.log(this.#notes);
+      // container.style.opacity = 1;
+      // modalInput.textContent = '';
+      // listItems.textContent = '';
+      // modalContainer.classList.add('hide');
+      // this._getLocalStorage();
+      this._handleModalVisibility();
       this._handleInstructionText();
+      this._getLocalStorage();
       //! clean code with save method
     }
 
@@ -154,12 +155,18 @@ class App {
     }
   }
 
+  _handleModalVisibility() {
+    container.style.opacity = 1;
+    modalInput.textContent = '';
+    listItems.textContent = '';
+    modalContainer.classList.add('hide');
+  }
+
   _saveSelectedNote() {
     const el = modalInput.querySelector('.list__item');
     const note = this.#notes.find((listEl) => listEl.id === el.dataset.id);
     note.title = el.querySelector('.form__title').value;
     note.text = el.querySelector('.form__text').value;
-    container.style.opacity = 1;
 
     // remove note from notes array if input is empty
     if (!note.title && !note.text) {
@@ -171,10 +178,7 @@ class App {
       console.log(this.#notes);
     }
 
-    modalInput.textContent = '';
-    listItems.textContent = '';
-    modalContainer.classList.add('hide');
-
+    this._handleModalVisibility();
     this._getLocalStorage();
 
     // check if a note is already rendered in the DOM
