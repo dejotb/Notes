@@ -14,8 +14,6 @@ class Note {
 
 // APPLICATION ARCHITECTURE
 const container = document.querySelector('.container');
-// const formTitle = document.querySelector('.form__title');
-// const formText = document.querySelector('.form__text');
 const listItems = document.querySelector('.list__items');
 const buttonCreateNewNote = document.querySelector('.button--cta');
 const modalContainer = document.querySelector('.modal__container');
@@ -118,15 +116,9 @@ class App {
     e.preventDefault();
 
     if (e.target.classList.contains('modal__container')) {
-      // container.style.opacity = 1;
-      // modalInput.textContent = '';
-      // listItems.textContent = '';
-      // modalContainer.classList.add('hide');
-      // this._getLocalStorage();
       this._handleModalVisibility();
       this._handleInstructionText();
       this._getLocalStorage();
-      //! clean code with save method
     }
 
     if (e.target.closest('.button__form--save--exit')) {

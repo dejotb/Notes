@@ -21,12 +21,6 @@
   --z-index-modal: 1200;
   --z-index-loader: 1300;
 }
-/* @media screen and (min-width: var(--bp-xl)) {
-  :root :root {
-    --fs-500: 2.75rem;
-    --fs-400: 2.5rem;
-  }
-} */
 
 *,
 *::before,
@@ -319,21 +313,18 @@ p:not(:last-child) {
 .instruction--edit {
   bottom: -12rem;
   left: 2rem;
-  /* transform: translate(-20%, 0); */
   width: 25rem;
 }
 
 .instruction--save {
   top: -6rem;
   left: 3rem;
-  /* transform: translate(-20%, 0); */
   width: 25rem;
 }
 
 .instruction--delete {
   bottom: -6rem;
   right: 3rem;
-  /* transform: translate(-20%, 0); */
   width: 18rem;
 }
 
