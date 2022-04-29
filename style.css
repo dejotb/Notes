@@ -54,7 +54,7 @@ body {
   line-height: 1.6;
   text-rendering: optimizeSpeed;
   min-height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
   background-color: #dcd9d4;
   background-image: linear-gradient(
     to top,
@@ -144,6 +144,7 @@ p:not(:last-child) {
 /* container styling */
 
 .container {
+  /* overflow-y: scroll; */
   display: grid;
   min-height: auto;
   justify-content: center;
@@ -233,6 +234,10 @@ p:not(:last-child) {
 .button__form--delete {
   width: 2.5rem;
   align-self: flex-end;
+}
+
+.button--settings {
+  position: fixed;
 }
 
 .hover {

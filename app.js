@@ -18,6 +18,7 @@ const listItems = document.querySelector('.list__items');
 const buttonCreateNewNote = document.querySelector('.button--cta');
 const modalContainer = document.querySelector('.modal__container');
 const modalInput = document.querySelector('.modal__input');
+const buttonSettings = document.querySelector('.button--settings');
 
 class App {
   #notes = [];
@@ -26,6 +27,7 @@ class App {
     buttonCreateNewNote.addEventListener('click', this._newNote.bind(this));
     listItems.addEventListener('click', this._handleNote.bind(this));
     modalContainer.addEventListener('click', this._handleNote.bind(this));
+    buttonSettings.addEventListener('click', this._reset.bind(this));
 
     // Get data from local storage
     this._getLocalStorage();
@@ -214,10 +216,10 @@ class App {
     console.log('got local storage');
   }
 
-  // reset() {
-  //   localStorage.removeItem('workouts');
-  //   location.reload();
-  // }
+  _reset() {
+    localStorage.removeItem('notes');
+    location.reload();
+  }
 
   _animateButton() {
     const iconPlus = buttonCreateNewNote.querySelector('#icon__plus');
