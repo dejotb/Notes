@@ -217,8 +217,26 @@ class App {
   }
 
   _reset() {
-    localStorage.removeItem('notes');
-    location.reload();
+    // this._getLocalStorage();
+    // alert('are you sure you want to delete all notes?');
+    modalContainer.classList.remove('hide');
+    const html = `<div class='modal--alert'>
+    <p>Are you sure you want to delete all notes?</p>
+    <button class='button--yes'>yes</button->
+    <button class='button--no'>no</button->
+    </div>`;
+    modalContainer.insertAdjacentHTML('afterbegin', html);
+    document.querySelector('.modal--alert').addEventListener('click', (e) => {
+      if (e.target.classList.contains('button--yes')) {
+        localStorage.removeItem('notes');
+        location.reload();
+        // this._setLocalStorage();
+        console.log(e.target);
+      }
+      if (e.target.classList.contains('button--no')) {
+        location.reload();
+      }
+    });
   }
 
   _animateButton() {
