@@ -59,9 +59,10 @@ class App {
 
     containerMain.style.opacity = 0;
 
-    // if (document.querySelector('.instruction--create')) {
-    //   document.querySelector('.instruction--create').remove();
-    // }
+    if (!document.querySelector('.instruction--create')) {
+      return;
+    }
+    document.querySelector('.instruction--create').remove();
   }
 
   _renderListItem(note) {
