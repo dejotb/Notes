@@ -43,6 +43,7 @@ class App {
   }
 
   _newNote() {
+    // this._getLocalStorage()
     // create new note
     const note = new Note(this._getRandomColor());
 
