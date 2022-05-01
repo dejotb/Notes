@@ -250,11 +250,11 @@ p:not(:last-child) {
 }
 
 .button__settings {
-  width: 6rem;
+  width: 4rem;
 }
 
 .button__settings--delete-all {
-  width: 3rem;
+  width: 2rem;
 }
 
 /* .button__settings:hover {
