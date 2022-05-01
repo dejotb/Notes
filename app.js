@@ -30,10 +30,10 @@ class App {
     buttonCreateNewNote.addEventListener('click', this._newNote.bind(this));
     listItems.addEventListener('click', this._handleNote.bind(this));
     modalContainer.addEventListener('click', this._handleNote.bind(this));
-    containerSettings.addEventListener(
-      'click',
-      this._handleSettings.bind(this)
-    );
+    // containerSettings.addEventListener(
+    //   'click',
+    //   this._handleSettings.bind(this)
+    // );
 
     // Get data from local storage
     this._getLocalStorage();
@@ -324,16 +324,16 @@ class App {
     }, 2000);
   }
 
-  _handleSettings(e) {
-    if (e.target.closest('.button__settings')) {
-      buttonSettings.classList.toggle('rotate');
-      // settingsOptions.classList.toggle('hidden');
-      settingsOptions.classList.toggle('translateX');
-    }
-    if (e.target.closest('.button__settings--delete-all')) {
-      this._reset();
-    }
-  }
+  // _handleSettings(e) {
+  //   if (e.target.closest('.button__settings')) {
+  //     buttonSettings.classList.toggle('rotate');
+  //     // settingsOptions.classList.toggle('hidden');
+  //     settingsOptions.classList.toggle('translateX');
+  //   }
+  //   if (e.target.closest('.button__settings--delete-all')) {
+  //     this._reset();
+  //   }
+  // }
 }
 
 const app = new App();
