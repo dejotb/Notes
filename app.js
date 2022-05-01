@@ -160,7 +160,10 @@ class App {
     containerMain.style.opacity = 1;
     modalInput.textContent = '';
     listItems.textContent = '';
+    // modalContainer.textContent = '';
     modalContainer.classList.add('hidden');
+    if (!document.querySelector('.modal--alert')) return;
+    document.querySelector('.modal--alert').remove();
   }
 
   _saveSelectedNote() {
