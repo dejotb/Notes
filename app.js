@@ -13,12 +13,15 @@ class Note {
 }
 
 // APPLICATION ARCHITECTURE
-const container = document.querySelector('.container');
+const containerMain = document.querySelector('.container');
+const containerSettings = document.querySelector('.container__settings');
 const listItems = document.querySelector('.list__items');
 const buttonCreateNewNote = document.querySelector('.button--cta');
 const modalContainer = document.querySelector('.modal__container');
 const modalInput = document.querySelector('.modal__input');
-const buttonSettings = document.querySelector('.button--settings');
+const buttonSettings = document.querySelector('.button__settings');
+const buttonDeleteAll = document.querySelector('.button__settings--delete-all');
+const settingsOptions = document.querySelector('.settings__options');
 
 class App {
   #notes = [];
@@ -27,7 +30,10 @@ class App {
     buttonCreateNewNote.addEventListener('click', this._newNote.bind(this));
     listItems.addEventListener('click', this._handleNote.bind(this));
     modalContainer.addEventListener('click', this._handleNote.bind(this));
-    buttonSettings.addEventListener('click', this._reset.bind(this));
+    containerSettings.addEventListener(
+      'click',
+      this._handleSettings.bind(this)
+    );
 
     // Get data from local storage
     this._getLocalStorage();
@@ -37,6 +43,7 @@ class App {
   }
 
   _newNote() {
+    this._getLocalStorage();
     // create new note
     const note = new Note(this._getRandomColor());
 
@@ -51,7 +58,7 @@ class App {
 
     console.log(this.#notes);
 
-    container.style.opacity = 0;
+    containerMain.style.opacity = 0;
 
     if (document.querySelector('.instruction--create')) {
       document.querySelector('.instruction--create').remove();
@@ -110,7 +117,7 @@ class App {
       </li>`;
 
     modalInput.insertAdjacentHTML('afterbegin', html);
-    modalContainer.classList.remove('hide');
+    modalContainer.classList.remove('hidden');
     this._handleInstructionText();
   }
 
@@ -140,7 +147,7 @@ class App {
         return;
       }
 
-      container.style.opacity = 0;
+      containerMain.style.opacity = 0;
       const note = this.#notes.find((listEl) => listEl.id === el.dataset.id);
       this._renderFormInputItem(note);
       if (note.title || note.text) {
@@ -150,10 +157,10 @@ class App {
   }
 
   _handleModalVisibility() {
-    container.style.opacity = 1;
+    containerMain.style.opacity = 1;
     modalInput.textContent = '';
     listItems.textContent = '';
-    modalContainer.classList.add('hide');
+    modalContainer.classList.add('hidden');
   }
 
   _saveSelectedNote() {
@@ -187,11 +194,11 @@ class App {
     const el = e.target.closest('.list__item');
     const elId = listItems.querySelector(`[data-id='${el.dataset.id}']`);
     this.#notes = this.#notes.filter((listEl) => listEl.id !== el.dataset.id);
-    container.style.opacity = 1;
+    containerMain.style.opacity = 1;
 
     this._setLocalStorage();
     modalInput.textContent = '';
-    modalContainer.classList.add('hide');
+    modalContainer.classList.add('hidden');
 
     if (!elId) return;
     elId.remove();
@@ -219,7 +226,7 @@ class App {
   _reset() {
     // this._getLocalStorage();
     // alert('are you sure you want to delete all notes?');
-    modalContainer.classList.remove('hide');
+    modalContainer.classList.remove('hidden');
     const html = `<div class='modal--alert'>
     <p>Are you sure you want to delete all notes?</p>
     <button class='button--yes'>yes</button->
@@ -312,6 +319,17 @@ class App {
         `;
       DOMelement.insertAdjacentHTML('afterbegin', html);
     }, 2000);
+  }
+
+  _handleSettings(e) {
+    if (e.target.closest('.button__settings')) {
+      buttonSettings.classList.toggle('rotate');
+      // settingsOptions.classList.toggle('hidden');
+      settingsOptions.classList.toggle('translateX');
+    }
+    if (e.target.closest('.button__settings--delete-all')) {
+      this._reset();
+    }
   }
 }
 
