@@ -62,7 +62,6 @@ body {
     var(--color-green) 100%
   );
   margin: 0 auto;
-  overflow-x: hidden;
 }
 
 ::selection {
@@ -266,9 +265,7 @@ p:not(:last-child) {
   display: grid;
   grid-gap: 0.5rem;
   transition: transform 0.3s ease-in-out;
-  /* transition: opacity 3s ease-in-out; */
-  /* background-color: pink; */
-  transform: translateY(-100%);
+  transform: translateX(-100%);
   z-index: -1;
 }
 
@@ -284,7 +281,7 @@ p:not(:last-child) {
 }
 
 .translateX {
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
 /* Footer */
