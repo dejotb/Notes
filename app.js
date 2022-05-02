@@ -161,7 +161,6 @@ class App {
     containerMain.style.opacity = 1;
     modalInput.textContent = '';
     listItems.textContent = '';
-    // modalContainer.textContent = '';
     modalContainer.classList.add('hidden');
     if (!document.querySelector('.modal--alert')) return;
     document.querySelector('.modal--alert').remove();
@@ -228,8 +227,6 @@ class App {
   }
 
   _reset() {
-    // this._getLocalStorage();
-    // alert('are you sure you want to delete all notes?');
     modalContainer.classList.remove('hidden');
     const html = `<div class='modal--alert'>
     <p>Are you sure you want to delete all notes?</p>
@@ -241,7 +238,6 @@ class App {
       if (e.target.classList.contains('button--yes')) {
         localStorage.removeItem('notes');
         location.reload();
-        // this._setLocalStorage();
         console.log(e.target);
       }
       if (e.target.classList.contains('button--no')) {
@@ -326,9 +322,11 @@ class App {
   }
 
   _handleSettings(e) {
-    if (e.target.closest('.button__settings')) {
+    if (
+      e.target.closest('.button__settings') ||
+      e.target.closest('.button__settings--delete-all')
+    ) {
       buttonSettings.classList.toggle('rotate');
-      // settingsOptions.classList.toggle('hidden');
       settingsOptions.classList.toggle('translateX');
     }
     if (e.target.closest('.button__settings--delete-all')) {
