@@ -15,10 +15,10 @@ class Note {
 // APPLICATION ARCHITECTURE
 const containerMain = document.querySelector('.container');
 const containerSettings = document.querySelector('.container__settings');
-const listItems = document.querySelector('.list__items');
-const buttonCreateNewNote = document.querySelector('.button--cta');
 const modalContainer = document.querySelector('.modal__container');
 const modalInput = document.querySelector('.modal__input');
+const listItems = document.querySelector('.list__items');
+const buttonCreateNewNote = document.querySelector('.button--cta');
 const buttonSettings = document.querySelector('.button__settings');
 const buttonDeleteAll = document.querySelector('.button__settings--delete-all');
 const settingsOptions = document.querySelector('.settings__options');
@@ -66,6 +66,7 @@ class App {
     document.querySelector('.instruction--create').remove();
   }
 
+  // rendereds list item
   _renderListItem(note) {
     const html = `
       <li class="list__item list__item--rendered" data-id="${
@@ -87,6 +88,7 @@ class App {
     listItems.insertAdjacentHTML('afterbegin', html);
   }
 
+  // renders input item
   _renderFormInputItem(note) {
     const html = `
       <li class="list__item list__item--input" data-id="${
@@ -122,6 +124,7 @@ class App {
     this._handleInstructionText();
   }
 
+  // checks what to do with a clicked part of a note
   _handleNote(e) {
     e.preventDefault();
 
@@ -157,6 +160,7 @@ class App {
     }
   }
 
+  // nadles visibility of a modal
   _handleModalVisibility() {
     containerMain.style.opacity = 1;
     modalInput.textContent = '';
@@ -166,6 +170,7 @@ class App {
     document.querySelector('.modal--alert').remove();
   }
 
+  // saves selected note
   _saveSelectedNote() {
     const el = modalInput.querySelector('.list__item');
     const note = this.#notes.find((listEl) => listEl.id === el.dataset.id);
@@ -193,6 +198,7 @@ class App {
     console.log(this.#notes);
   }
 
+  // deletes a note
   _deleteSelectedNote(e) {
     const el = e.target.closest('.list__item');
     const elId = listItems.querySelector(`[data-id='${el.dataset.id}']`);
@@ -226,6 +232,7 @@ class App {
     console.log('got local storage');
   }
 
+  // deletes notes from a notes array and a local storage
   _reset() {
     modalContainer.classList.remove('hidden');
     const html = `<div class='modal--alert'>
@@ -283,6 +290,7 @@ class App {
       .join(',')})`;
   }
 
+  // handles instructions visibility
   _handleInstructionText() {
     if (this.#notes.length > 1) {
       return;
@@ -310,6 +318,7 @@ class App {
     }
   }
 
+  // renders instruction
   _renderInstructionText(img, DOMelement) {
     setTimeout(() => {
       const html = `
@@ -321,6 +330,7 @@ class App {
     }, 2000);
   }
 
+  // handles app settings - delete all button
   _handleSettings(e) {
     if (
       e.target.closest('.button__settings') ||
