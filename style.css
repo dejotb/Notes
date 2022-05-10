@@ -13,7 +13,7 @@
   --color-yellow: #fdd01b;
   --color-blue: #0074d9;
   --color-red: #db3445;
-  --color-white: #ffffff;
+  --color-white: #dcd9d4;
   --color-grey: 54, 54, 54;
   --z-index-negative: -1;
   --z-index-box: 1000;
@@ -55,7 +55,7 @@ body {
   text-rendering: optimizeSpeed;
   min-height: 100vh;
   /* width: 100vw; */
-  background-color: #dcd9d4;
+  /* background-color: var(--color-white); */
   background-image: linear-gradient(
     to top,
     var(--color-blue) 0%,
@@ -243,7 +243,8 @@ p:not(:last-child) {
 
 /* .settings__options, */
 .button__settings,
-.button__settings--delete-all {
+.button__settings--delete-all,
+.button__settings--theme {
   height: auto;
   margin: 0.5rem;
   transition: all 0.5s ease-in-out;
@@ -253,7 +254,8 @@ p:not(:last-child) {
   width: 4rem;
 }
 
-.button__settings--delete-all {
+.button__settings--delete-all,
+.button__settings--theme {
   width: 2rem;
 }
 
@@ -334,6 +336,38 @@ p:not(:last-child) {
   z-index: 99;
 }
 
+.modal__alert {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  width: 80vw;
+  height: 15rem;
+  padding: 1rem;
+  background-color: var(--color-white);
+  border: 1px black solid;
+  border-radius: 5px;
+}
+
+.alert__buttons {
+  /* height: 2rem; */
+  width: 100%;
+  display: flex;
+  grid-gap: 2rem;
+  justify-content: center;
+}
+
+.button--yes,
+.button--no {
+  height: 3rem;
+  width: 6rem;
+  border: 1px black solid;
+  border-radius: 5px;
+}
+
+.button--yes {
+  background-color: var(--color-red);
+}
+
 .hidden {
   opacity: 0;
   display: none;
@@ -383,6 +417,10 @@ p:not(:last-child) {
   .list__item--input {
     width: 70vw;
   }
+
+  .modal__alert {
+    width: 50vw;
+  }
 }
 
 @media screen and (min-width: 1000px) {
@@ -392,5 +430,9 @@ p:not(:last-child) {
 
   .list__item--input {
     width: 70rem;
+  }
+
+  .modal__alert {
+    width: 30vw;
   }
 }

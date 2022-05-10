@@ -166,8 +166,8 @@ class App {
     modalInput.textContent = '';
     listItems.textContent = '';
     modalContainer.classList.add('hidden');
-    if (!document.querySelector('.modal--alert')) return;
-    document.querySelector('.modal--alert').remove();
+    if (!document.querySelector('.modal__alert')) return;
+    document.querySelector('.modal__alert').remove();
   }
 
   // saves selected note
@@ -235,13 +235,15 @@ class App {
   // deletes notes from a notes array and a local storage
   _reset() {
     modalContainer.classList.remove('hidden');
-    const html = `<div class='modal--alert'>
+    const html = `<div class='modal__alert'>
     <p>Are you sure you want to delete all notes?</p>
-    <button class='button--yes'>yes</button->
-    <button class='button--no'>no</button->
+    <div class='alert__buttons'>
+      <button class='button--yes'>yes</button->
+      <button class='button--no'>no</button->
+    </div>
     </div>`;
     modalContainer.insertAdjacentHTML('afterbegin', html);
-    document.querySelector('.modal--alert').addEventListener('click', (e) => {
+    document.querySelector('.modal__alert').addEventListener('click', (e) => {
       if (e.target.classList.contains('button--yes')) {
         localStorage.removeItem('notes');
         location.reload();
@@ -334,7 +336,8 @@ class App {
   _handleSettings(e) {
     if (
       e.target.closest('.button__settings') ||
-      e.target.closest('.button__settings--delete-all')
+      e.target.closest('.button__settings--delete-all') ||
+      e.target.closest('.button__settings--theme')
     ) {
       buttonSettings.classList.toggle('rotate');
       settingsOptions.classList.toggle('translateX');
@@ -342,7 +345,38 @@ class App {
     if (e.target.closest('.button__settings--delete-all')) {
       this._reset();
     }
+    if (e.target.closest('.button__settings--theme')) {
+      this._changeTheme();
+    }
+  }
+
+  _changeTheme() {
+    modalContainer.classList.remove('hidden');
+    const html = `<div class='modal__alert'>
+    <fieldset>
+    <legend>Select a maintenance drone:</legend>
+
+    <div>
+      <input type="radio" id="huey" name="drone" value="huey"
+             checked>
+      <label for="huey">Huey</label>
+    </div>
+
+    <div>
+      <input type="radio" id="dewey" name="drone" value="dewey">
+      <label for="dewey">Dewey</label>
+    </div>
+
+    <div>
+      <input type="radio" id="louie" name="drone" value="louie">
+      <label for="louie">Louie</label>
+    </div>
+</fieldset>
+    </div>`;
+    modalContainer.insertAdjacentHTML('afterbegin', html);
   }
 }
 
 const app = new App();
+
+document.documentElement.style.setProperty('--color-blue', '#bada55');
