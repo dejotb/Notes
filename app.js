@@ -26,6 +26,8 @@ const settingsOptions = document.querySelector('.settings__options');
 class App {
   #notes = [];
 
+  #themeColor = '#0074d9';
+
   constructor() {
     buttonCreateNewNote.addEventListener('click', this._newNote.bind(this));
     listItems.addEventListener('click', this._handleNote.bind(this));
@@ -36,14 +38,21 @@ class App {
     );
 
     // Get data from local storage
-    this._getLocalStorage();
+    this._getLocalStorageNotes();
+    this._getLocalStorageTheme();
+
+    // set theme based on information from local storage
+    document.documentElement.style.setProperty(
+      '--color-theme',
+      this.#themeColor
+    );
 
     // Show instruction
     this._handleInstructionText();
   }
 
   _newNote() {
-    // this._getLocalStorage()
+    // this._getLocalStorageNotes()
     // create new note
     const note = new Note(this._getRandomColor());
 
@@ -132,7 +141,7 @@ class App {
     if (e.target.classList.contains('modal__container')) {
       this._handleModalVisibility();
       this._handleInstructionText();
-      this._getLocalStorage();
+      this._getLocalStorageNotes();
     }
 
     if (e.target.closest('.button__form--save--exit')) {
@@ -156,7 +165,7 @@ class App {
       const note = this.#notes.find((listEl) => listEl.id === el.dataset.id);
       this._renderFormInputItem(note);
       if (note.title || note.text) {
-        this._setLocalStorage();
+        this._setLocalStorage('notes', this.#notes);
       }
     }
   }
@@ -184,12 +193,12 @@ class App {
     }
 
     if (note.title || note.text) {
-      this._setLocalStorage();
+      this._setLocalStorage('notes', this.#notes);
       console.log(this.#notes);
     }
 
     this._handleModalVisibility();
-    this._getLocalStorage();
+    this._getLocalStorageNotes();
 
     // check if a note is already rendered in the DOM
     if ([...listItems.children].some((listEl) => listEl.dataset.id === note.id))
@@ -206,7 +215,7 @@ class App {
     this.#notes = this.#notes.filter((listEl) => listEl.id !== el.dataset.id);
     containerMain.style.opacity = 1;
 
-    this._setLocalStorage();
+    this._setLocalStorage('notes', this.#notes);
     modalInput.textContent = '';
     modalContainer.classList.add('hidden');
 
@@ -216,11 +225,11 @@ class App {
     console.log(this.#notes);
   }
 
-  _setLocalStorage() {
-    localStorage.setItem('notes', JSON.stringify(this.#notes));
+  _setLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
-  _getLocalStorage() {
+  _getLocalStorageNotes() {
     const data = JSON.parse(localStorage.getItem('notes'));
 
     if (!data) return;
@@ -231,6 +240,14 @@ class App {
       this._renderListItem(note);
     });
     console.log('got local storage');
+  }
+
+  _getLocalStorageTheme() {
+    const data = JSON.parse(localStorage.getItem('theme'));
+
+    if (!data) return;
+
+    return (this.#themeColor = data);
   }
 
   // deletes notes from a notes array and a local storage
@@ -389,20 +406,30 @@ class App {
       console.log(selectedThemeOption.value);
 
       if (selectedThemeOption.value === 'amazon-morning') {
-        document.documentElement.style.setProperty('--color-theme', '#0074d9');
+        this.#themeColor = '#0074d9';
+        document.documentElement.style.setProperty(
+          '--color-theme',
+          this.#themeColor
+        );
       }
 
       if (selectedThemeOption.value === 'dewey') {
-        document.documentElement.style.setProperty('--color-theme', '#bada55');
+        this.#themeColor = '#bada55';
+        document.documentElement.style.setProperty(
+          '--color-theme',
+          this.#themeColor
+        );
       }
 
       if (selectedThemeOption.value === 'louie') {
-        document.documentElement.style.setProperty('--color-theme', 'pink');
+        this.#themeColor = '#11347d';
+        document.documentElement.style.setProperty(
+          '--color-theme',
+          this.#themeColor
+        );
       }
 
-      // _setLocalStorage() {
-      //   localStorage.setItem('theme', JSON.stringify(this.#notes));
-      // }
+      this._setLocalStorage('theme', this.#themeColor);
     });
   }
 }
