@@ -15,6 +15,7 @@
   --color-red: #db3445;
   --color-white: #dcd9d4;
   --color-grey: 54, 54, 54;
+  --color-theme: #0074d9;
   --z-index-negative: -1;
   --z-index-box: 1000;
   --z-index-popup: 1100;
@@ -58,7 +59,7 @@ body {
   /* background-color: var(--color-white); */
   background-image: linear-gradient(
     to top,
-    var(--color-blue) 0%,
+    var(--color-theme) 0%,
     var(--color-green) 100%
   );
   margin: 0 auto;

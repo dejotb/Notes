@@ -126,8 +126,9 @@ class App {
 
   // checks what to do with a clicked part of a note
   _handleNote(e) {
-    e.preventDefault();
+    // e.preventDefault();
 
+    // console.log(e.target);
     if (e.target.classList.contains('modal__container')) {
       this._handleModalVisibility();
       this._handleInstructionText();
@@ -346,28 +347,29 @@ class App {
       this._reset();
     }
     if (e.target.closest('.button__settings--theme')) {
-      this._changeTheme();
+      this._renderThemeSelectionText();
+      this._changeTheme(e);
     }
   }
 
-  _changeTheme() {
+  _renderThemeSelectionText() {
     modalContainer.classList.remove('hidden');
     const html = `<div class='modal__alert'>
     <fieldset>
-    <legend>Select a maintenance drone:</legend>
+    <legend>Select a theme:</legend>
 
-    <div>
-      <input type="radio" id="huey" name="drone" value="huey"
+    <div class='theme__option'>
+      <input type="radio" id="amazon-morning" name="drone" value="amazon-morning"
              checked>
-      <label for="huey">Huey</label>
+      <label for="amazon-morning">amazon-morning</label>
     </div>
 
-    <div>
+    <div class='theme__option'>
       <input type="radio" id="dewey" name="drone" value="dewey">
       <label for="dewey">Dewey</label>
     </div>
 
-    <div>
+    <div class='theme__option'>
       <input type="radio" id="louie" name="drone" value="louie">
       <label for="louie">Louie</label>
     </div>
@@ -375,8 +377,34 @@ class App {
     </div>`;
     modalContainer.insertAdjacentHTML('afterbegin', html);
   }
+
+  _changeTheme() {
+    const formTheme = document.querySelector('fieldset');
+    // console.log(formTheme);
+    formTheme.addEventListener('click', (e) => {
+      if (e.target.closest('.theme__option'));
+      const selectedThemeOption = [...document.querySelectorAll('input')].find(
+        (el) => el.checked
+      );
+      console.log(selectedThemeOption.value);
+
+      if (selectedThemeOption.value === 'amazon-morning') {
+        document.documentElement.style.setProperty('--color-theme', '#0074d9');
+      }
+
+      if (selectedThemeOption.value === 'dewey') {
+        document.documentElement.style.setProperty('--color-theme', '#bada55');
+      }
+
+      if (selectedThemeOption.value === 'louie') {
+        document.documentElement.style.setProperty('--color-theme', 'pink');
+      }
+
+      // _setLocalStorage() {
+      //   localStorage.setItem('theme', JSON.stringify(this.#notes));
+      // }
+    });
+  }
 }
 
 const app = new App();
-
-document.documentElement.style.setProperty('--color-blue', '#bada55');
