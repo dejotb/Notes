@@ -129,6 +129,13 @@ p:not(:last-child) {
   margin-bottom: 1rem;
 }
 
+fieldset {
+  display: grid;
+  grid-gap: 1rem;
+  padding: 1rem 0;
+  border: none;
+}
+
 .img {
   transition: 0.2s all ease-in-out;
   height: 100%;
@@ -223,13 +230,21 @@ p:not(:last-child) {
 }
 
 .button__form--delete,
-.button__form--save--exit {
+.button__form--save--exit,
+.button__alert--save--exit {
   height: auto;
   margin: 0.5rem;
 }
 
+.button__alert--save--exit,
 .button__form--save--exit {
   width: 4rem;
+}
+
+.button__alert--save--exit {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .button__form--delete {
@@ -270,9 +285,6 @@ p:not(:last-child) {
   transition: transform 0.3s ease-in-out;
   transform: translateX(-100%);
   z-index: -1;
-}
-
-.button__settings--delete-all {
 }
 
 .hover {
@@ -338,11 +350,12 @@ p:not(:last-child) {
 }
 
 .modal__alert {
+  position: relative;
   display: grid;
   justify-items: center;
   align-items: center;
   width: 80vw;
-  height: 15rem;
+  min-height: 15rem;
   padding: 1rem;
   background-color: var(--color-white);
   border: 1px black solid;

@@ -105,7 +105,6 @@ class App {
       }" style='background-color:rgb(${note.color})'>
         <button class="button button__form--save--exit" type="submit" title="save"> <img src="img/arrow.svg" alt="save note"></button>
         <form class="form" name="notes__form">
-
           <input style='color: ${this._darkenRandomColor(
             note.color,
             2.75
@@ -138,7 +137,10 @@ class App {
     // e.preventDefault();
 
     // console.log(e.target);
-    if (e.target.classList.contains('modal__container')) {
+    if (
+      e.target.classList.contains('modal__container') ||
+      e.target.closest('.button__alert--save--exit')
+    ) {
       this._handleModalVisibility();
       this._handleInstructionText();
       this._getLocalStorageNotes();
@@ -253,12 +255,13 @@ class App {
   // deletes notes from a notes array and a local storage
   _reset() {
     modalContainer.classList.remove('hidden');
-    const html = `<div class='modal__alert'>
-    <p>Are you sure you want to delete all notes?</p>
-    <div class='alert__buttons'>
-      <button class='button--yes'>yes</button->
-      <button class='button--no'>no</button->
-    </div>
+    const html = `
+    <div class='modal__alert'>
+      <p>Are you sure you want to delete all notes?</p>
+      <div class='alert__buttons'>
+        <button class='button--yes'>yes</button->
+        <button class='button--no'>no</button->
+      </div>
     </div>`;
     modalContainer.insertAdjacentHTML('afterbegin', html);
     document.querySelector('.modal__alert').addEventListener('click', (e) => {
@@ -343,8 +346,8 @@ class App {
     setTimeout(() => {
       const html = `
         <div class="instruction--${img}">
-        <img src="img/instruction__arrow--${img}.png" alt="instruction" />
-      </div>
+          <img src="img/instruction__arrow--${img}.png" alt="instruction" />
+        </div>
         `;
       DOMelement.insertAdjacentHTML('afterbegin', html);
     }, 2000);
@@ -371,26 +374,25 @@ class App {
 
   _renderThemeSelectionText() {
     modalContainer.classList.remove('hidden');
-    const html = `<div class='modal__alert'>
-    <fieldset>
-    <legend>Select a theme:</legend>
-
-    <div class='theme__option'>
-      <input type="radio" id="amazon-morning" name="drone" value="amazon-morning"
-             checked>
-      <label for="amazon-morning">amazon-morning</label>
-    </div>
-
-    <div class='theme__option'>
-      <input type="radio" id="dewey" name="drone" value="dewey">
-      <label for="dewey">Dewey</label>
-    </div>
-
-    <div class='theme__option'>
-      <input type="radio" id="louie" name="drone" value="louie">
-      <label for="louie">Louie</label>
-    </div>
-</fieldset>
+    const html = `
+    <div class='modal__alert'>
+    <button class="button button__alert--save--exit" type="submit" title="save"> <img src="img/arrow.svg" alt="save note"></button>
+      <fieldset>
+        <legend>Select a theme:</legend>
+        <div class='theme__option'>
+          <input type="radio" id="amazon-morning" name="drone" value="amazon-morning"
+                >
+          <label for="amazon-morning">Amazon Morning</label>
+        </div>
+        <div class='theme__option'>
+          <input type="radio" id="young-banana" name="drone" value="young-banana">
+          <label for="young-banana">Young Banana</label>
+        </div>
+        <div class='theme__option'>
+          <input type="radio" id="whole-green" name="drone" value="whole-green">
+          <label for="whole-green">Whole Green</label>
+        </div>
+      </fieldset>
     </div>`;
     modalContainer.insertAdjacentHTML('afterbegin', html);
   }
@@ -413,7 +415,7 @@ class App {
         );
       }
 
-      if (selectedThemeOption.value === 'dewey') {
+      if (selectedThemeOption.value === 'young-banana') {
         this.#themeColor = '#bada55';
         document.documentElement.style.setProperty(
           '--color-theme',
@@ -421,8 +423,8 @@ class App {
         );
       }
 
-      if (selectedThemeOption.value === 'louie') {
-        this.#themeColor = '#11347d';
+      if (selectedThemeOption.value === 'whole-green') {
+        this.#themeColor = '#3cba92';
         document.documentElement.style.setProperty(
           '--color-theme',
           this.#themeColor
