@@ -55,8 +55,6 @@ body {
   line-height: 1.6;
   text-rendering: optimizeSpeed;
   min-height: 100vh;
-  /* width: 100vw; */
-  /* background-color: var(--color-white); */
   background-image: linear-gradient(
     to top,
     var(--color-theme) 0%,
@@ -152,7 +150,6 @@ fieldset {
 /* container styling */
 
 .container {
-  /* overflow-y: scroll; */
   display: grid;
   min-height: auto;
   justify-content: center;
@@ -195,7 +192,7 @@ fieldset {
 .list__item textarea {
   width: 100%;
   padding: 0.5rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   background-color: inherit;
 }
 
@@ -274,10 +271,6 @@ fieldset {
 .button__settings--theme {
   width: 2rem;
 }
-
-/* .button__settings:hover {
-  transform: rotate(180deg);
-} */
 
 .settings__options {
   display: grid;
@@ -363,7 +356,6 @@ fieldset {
 }
 
 .alert__buttons {
-  /* height: 2rem; */
   width: 100%;
   display: flex;
   grid-gap: 2rem;

@@ -20,7 +20,6 @@ const modalInput = document.querySelector('.modal__input');
 const listItems = document.querySelector('.list__items');
 const buttonCreateNewNote = document.querySelector('.button--cta');
 const buttonSettings = document.querySelector('.button__settings');
-const buttonDeleteAll = document.querySelector('.button__settings--delete-all');
 const settingsOptions = document.querySelector('.settings__options');
 
 class App {
@@ -52,7 +51,6 @@ class App {
   }
 
   _newNote() {
-    // this._getLocalStorageNotes()
     // create new note
     const note = new Note(this._getRandomColor());
 
@@ -64,8 +62,6 @@ class App {
 
     // Animate new note button
     this._animateButton();
-
-    console.log(this.#notes);
 
     containerMain.style.opacity = 0;
 
@@ -134,9 +130,6 @@ class App {
 
   // checks what to do with a clicked part of a note
   _handleNote(e) {
-    // e.preventDefault();
-
-    // console.log(e.target);
     if (
       e.target.classList.contains('modal__container') ||
       e.target.closest('.button__alert--save--exit')
@@ -152,7 +145,6 @@ class App {
     }
 
     if (e.target.closest('.button__form--delete')) {
-      console.log(e);
       this._deleteSelectedNote(e);
     }
 
@@ -196,7 +188,6 @@ class App {
 
     if (note.title || note.text) {
       this._setLocalStorage('notes', this.#notes);
-      console.log(this.#notes);
     }
 
     this._handleModalVisibility();
@@ -207,7 +198,6 @@ class App {
       return;
 
     this._renderListItem(note);
-    console.log(this.#notes);
   }
 
   // deletes a note
@@ -223,8 +213,6 @@ class App {
 
     if (!elId) return;
     elId.remove();
-
-    console.log(this.#notes);
   }
 
   _setLocalStorage(key, value) {
@@ -241,7 +229,6 @@ class App {
     this.#notes.forEach((note) => {
       this._renderListItem(note);
     });
-    console.log('got local storage');
   }
 
   _getLocalStorageTheme() {
@@ -268,7 +255,6 @@ class App {
       if (e.target.classList.contains('button--yes')) {
         localStorage.removeItem('notes');
         location.reload();
-        console.log(e.target);
       }
       if (e.target.classList.contains('button--no')) {
         location.reload();
@@ -276,6 +262,7 @@ class App {
     });
   }
 
+  // animates add button on click
   _animateButton() {
     const iconPlus = buttonCreateNewNote.querySelector('#icon__plus');
     iconPlus.classList.add('fade-out-in');
@@ -299,8 +286,6 @@ class App {
     ];
 
     const max = colors.length;
-
-    console.log(colors.length);
 
     const number = Math.floor(Math.random() * (max - min) + min);
     return colors[number];
@@ -341,7 +326,7 @@ class App {
     }
   }
 
-  // renders instruction
+  // renders instruction arrows
   _renderInstructionText(img, DOMelement) {
     setTimeout(() => {
       const html = `
@@ -399,13 +384,11 @@ class App {
 
   _changeTheme() {
     const formTheme = document.querySelector('fieldset');
-    // console.log(formTheme);
     formTheme.addEventListener('click', (e) => {
       if (e.target.closest('.theme__option'));
       const selectedThemeOption = [...document.querySelectorAll('input')].find(
         (el) => el.checked
       );
-      console.log(selectedThemeOption.value);
 
       if (selectedThemeOption.value === 'amazon-morning') {
         this.#themeColor = '#0074d9';
