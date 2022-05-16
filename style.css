@@ -252,6 +252,7 @@ fieldset {
 .container__settings {
   position: fixed;
   display: grid;
+  z-index: var(--z-index-popup);
 }
 
 /* .settings__options, */
