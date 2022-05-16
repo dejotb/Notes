@@ -296,11 +296,22 @@ fieldset {
 
 .footer {
   align-self: end;
-  display: flex;
+  padding: 1rem;
+  line-height: 0.9;
+  display: grid;
   justify-content: center;
-  font-size: 4rem;
+  /* font-size: 2.5rem; */
   color: #d6e5e5;
+}
+
+.footer__quote {
   font-family: var(--ff-display);
+  font-size: 3rem;
+}
+
+.footer__author {
+  font-family: var(--ff-primary);
+  font-size: 1.2rem;
 }
 
 /* animations */
