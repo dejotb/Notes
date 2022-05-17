@@ -343,7 +343,8 @@ class App {
     if (
       e.target.closest('.button__settings') ||
       e.target.closest('.button__settings--delete-all') ||
-      e.target.closest('.button__settings--theme')
+      e.target.closest('.button__settings--theme') ||
+      e.target.closest('.button__quote')
     ) {
       buttonSettings.classList.toggle('rotate');
       settingsOptions.classList.toggle('translateX');
@@ -352,12 +353,16 @@ class App {
       this._reset();
     }
     if (e.target.closest('.button__settings--theme')) {
-      this._renderThemeSelectionText();
+      this._renderThemeSelectionHTML();
       this._changeTheme(e);
+    }
+    if (e.target.closest('.button__quote')) {
+      console.log('quote');
+      this._generateQuote();
     }
   }
 
-  _renderThemeSelectionText() {
+  _renderThemeSelectionHTML() {
     modalContainer.classList.remove('hidden');
     const html = `
     <div class='modal__alert'>
@@ -417,6 +422,20 @@ class App {
       this._setLocalStorage('theme', this.#themeColor);
     });
   }
+
+  _generateQuote() {
+    modalContainer.classList.remove('hidden');
+    const html = `
+    <div class='modal__alert'>
+      <button class="button button__alert--save--exit" type="submit" title="save"> <img src="img/arrow.svg" alt="save note"></button>
+      <p class="quote">„Silence is the sleep that nourishes wisdom”.
+        <span class="quote__author">olaf porotsds</span>
+      </p>
+    </div>`;
+    modalContainer.insertAdjacentHTML('afterbegin', html);
+  }
+
+  _getQuote() {}
 }
 
 const app = new App();

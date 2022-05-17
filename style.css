@@ -301,16 +301,17 @@ fieldset {
   line-height: 0.9;
   display: grid;
   justify-content: center;
-  /* font-size: 2.5rem; */
+  font-family: var(--ff-display);
+  font-size: 4rem;
   color: #d6e5e5;
 }
 
-.footer__quote {
+.quote {
   font-family: var(--ff-display);
   font-size: 3rem;
 }
 
-.footer__author {
+.quote__author {
   font-family: var(--ff-primary);
   font-size: 1.2rem;
 }
@@ -351,7 +352,7 @@ fieldset {
   justify-content: center;
   align-items: center;
   opacity: 1;
-  z-index: 99;
+  z-index: var(--z-index-modal);
 }
 
 .modal__alert {
