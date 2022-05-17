@@ -2,7 +2,7 @@
 
 :root {
   --ff-primary: "Roboto", sans-serif;
-  --ff-display: "Beau Rivage", cursive;
+  --ff-display: "Sail", cursive;
   --fs-xl: clamp(3.5rem, 6vw + 1rem, 5rem);
   --fs-600: clamp(3.25rem, 6vw + 1rem, 4rem);
   --fs-500: 2rem;
@@ -255,22 +255,19 @@ fieldset {
   z-index: var(--z-index-popup);
 }
 
-/* .settings__options, */
-.button__settings,
-.button__settings--delete-all,
-.button__settings--theme {
+.setting {
   height: auto;
   margin: 0.5rem;
-  transition: all 0.5s ease-in-out;
-}
-
-.button__settings {
-  width: 4rem;
-}
-
-.button__settings--delete-all,
-.button__settings--theme {
   width: 2rem;
+  /* transition: all 0.5s ease-in-out; */
+}
+
+/* .settings__options, */
+.button__settings {
+  height: auto;
+  width: 4rem;
+  margin: 0.5rem;
+  transition: all 0.5s ease-in-out;
 }
 
 .settings__options {
@@ -302,18 +299,19 @@ fieldset {
   display: grid;
   justify-content: center;
   font-family: var(--ff-display);
-  font-size: 4rem;
+  font-size: 3rem;
   color: #d6e5e5;
 }
 
 .quote {
   font-family: var(--ff-display);
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 .quote__author {
   font-family: var(--ff-primary);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-style: italic;
 }
 
 /* animations */
@@ -360,7 +358,7 @@ fieldset {
   display: grid;
   justify-items: center;
   align-items: center;
-  width: 80vw;
+  width: 95vw;
   min-height: 15rem;
   padding: 1rem;
   background-color: var(--color-white);
@@ -438,7 +436,8 @@ fieldset {
   }
 
   .modal__alert {
-    width: 50vw;
+    width: 70vw;
+    padding: 2rem;
   }
 }
 
@@ -452,6 +451,6 @@ fieldset {
   }
 
   .modal__alert {
-    width: 30vw;
+    width: 35vw;
   }
 }

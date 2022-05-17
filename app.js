@@ -345,6 +345,7 @@ class App {
       e.target.closest('.button__settings--delete-all') ||
       e.target.closest('.button__settings--theme') ||
       e.target.closest('.button__quote')
+      // e.target.closest('.setting')
     ) {
       buttonSettings.classList.toggle('rotate');
       settingsOptions.classList.toggle('translateX');
@@ -354,10 +355,9 @@ class App {
     }
     if (e.target.closest('.button__settings--theme')) {
       this._renderThemeSelectionHTML();
-      this._changeTheme(e);
+      this._changeTheme();
     }
     if (e.target.closest('.button__quote')) {
-      console.log('quote');
       this._generateQuote();
     }
   }
@@ -404,7 +404,7 @@ class App {
       }
 
       if (selectedThemeOption.value === 'young-banana') {
-        this.#themeColor = '#bada55';
+        this.#themeColor = '#ccae62';
         document.documentElement.style.setProperty(
           '--color-theme',
           this.#themeColor
@@ -412,7 +412,7 @@ class App {
       }
 
       if (selectedThemeOption.value === 'whole-green') {
-        this.#themeColor = '#3cba92';
+        this.#themeColor = '#218c74';
         document.documentElement.style.setProperty(
           '--color-theme',
           this.#themeColor
@@ -423,19 +423,24 @@ class App {
     });
   }
 
-  _generateQuote() {
-    modalContainer.classList.remove('hidden');
-    const html = `
-    <div class='modal__alert'>
+  async _generateQuote() {
+    try {
+      const data = await fetch(`https://api.goprogram.ai/inspiration`);
+      const result = await data.json();
+      const html = `
+      <div class='modal__alert'>
       <button class="button button__alert--save--exit" type="submit" title="save"> <img src="img/arrow.svg" alt="save note"></button>
-      <p class="quote">„Silence is the sleep that nourishes wisdom”.
-        <span class="quote__author">olaf porotsds</span>
+      <p>Quote for today is:</p>
+      <p class="quote">„${result.quote}”
+      <span class="quote__author">${result.author}</span>
       </p>
-    </div>`;
-    modalContainer.insertAdjacentHTML('afterbegin', html);
+      </div>`;
+      modalContainer.classList.remove('hidden');
+      modalContainer.insertAdjacentHTML('afterbegin', html);
+    } catch (err) {
+      alert(err);
+    }
   }
-
-  _getQuote() {}
 }
 
 const app = new App();
