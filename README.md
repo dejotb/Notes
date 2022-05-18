@@ -1,9 +1,9 @@
 # Notes 'n Quotes
 
-Tool that allows user to add, edit and delete randomly colored notes.
+Tool that allows user to add, edit and delete the randomly colored notes.
 
-User can add a subject of each note, as well as insert text, that may be almost unlimited in its length.
-All notes are visible in the main panel. However, clicking on a note allow to see it on full screen mode and edit it.
+User can add a subject of each note, as well as insert text, that may be almost unlimited in it's length.
+All notes are visible in the main panel. However, clicking on a note allows to see it on full screen mode and edit it.
 
 Additionally, the tool's settings options allow to:
 
@@ -26,4 +26,4 @@ Notes and theme settings are stored in a local storage.
 - Animations in CSS,
 - Forms creation,
 
-Live: https://github.com/dejotb/Notes-n-Quotes
+Live: https://dejotb.github.io/Notes-n-Quotes/
