@@ -1,4 +1,4 @@
-# Notes-n-Quotes
+# Notes 'n Quotes
 
 Tool that allows a user to add, edit and delete notes.
 Setting options include:
