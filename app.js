@@ -15,7 +15,7 @@ class Note {
 // APPLICATION ARCHITECTURE
 const containerMain = document.querySelector('.container');
 const containerSettings = document.querySelector('.container__settings');
-const modalContainer = document.querySelector('.modal__container');
+const modalContainer = document.querySelector('.container__modal');
 const modalInput = document.querySelector('.modal__input');
 const listItems = document.querySelector('.list__items');
 const buttonCreateNewNote = document.querySelector('.button--cta');
@@ -131,7 +131,7 @@ class App {
   // checks what to do with a clicked part of a note
   _handleNote(e) {
     if (
-      e.target.classList.contains('modal__container') ||
+      e.target.classList.contains('container__modal') ||
       e.target.closest('.button__alert--save--exit')
     ) {
       this._handleModalVisibility();
@@ -340,13 +340,7 @@ class App {
 
   // handles app settings - delete all button
   _handleSettings(e) {
-    if (
-      e.target.closest('.button__settings') ||
-      e.target.closest('.button__settings--delete-all') ||
-      e.target.closest('.button__settings--theme') ||
-      e.target.closest('.button__quote')
-      // e.target.closest('.setting')
-    ) {
+    if (e.target.closest('.button__settings') || e.target.closest('.setting')) {
       buttonSettings.classList.toggle('rotate');
       settingsOptions.classList.toggle('translateX');
     }
