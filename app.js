@@ -364,16 +364,16 @@ class App {
       <fieldset>
         <legend>Select a theme:</legend>
         <div class='theme__option'>
-          <input type="radio" id="amazon-morning" name="drone" value="amazon-morning"
-                >
+          <input type="radio" id="amazon-morning" name="theme" value="amazon-morning"
+                checked>
           <label for="amazon-morning">Amazon Morning</label>
         </div>
         <div class='theme__option'>
-          <input type="radio" id="young-banana" name="drone" value="young-banana">
+          <input type="radio" id="young-banana" name="theme" value="young-banana">
           <label for="young-banana">Young Banana</label>
         </div>
         <div class='theme__option'>
-          <input type="radio" id="whole-green" name="drone" value="whole-green">
+          <input type="radio" id="whole-green" name="theme" value="whole-green">
           <label for="whole-green">Whole Green</label>
         </div>
       </fieldset>
