@@ -1,6 +1,6 @@
 # Notes 'n Quotes
 
-Tool that allows user to add, edit and delete the randomly colored notes.
+A tool that allows user to add, edit and delete the randomly colored notes.
 
 User can add a subject of each note, as well as insert text, that may be almost unlimited in it's length.
 All notes are visible in the main panel. However, clicking on a note allows to see it on full screen mode and edit it.
