@@ -219,6 +219,10 @@ fieldset {
   height: 10rem;
 }
 
+.list__item .dragging {
+  border: 1px solid red;
+}
+
 .form__title,
 .list__item textarea {
   background-color: inherit;

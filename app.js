@@ -18,6 +18,7 @@ const containerSettings = document.querySelector('.container__settings');
 const modalContainer = document.querySelector('.container__modal');
 const modalInput = document.querySelector('.modal__input');
 const listItems = document.querySelector('.list__items');
+const listItem = document.querySelectorAll('.list__item');
 const buttonCreateNewNote = document.querySelector('.button--cta');
 const buttonSettings = document.querySelector('.button__settings');
 const settingsOptions = document.querySelector('.settings__options');
@@ -35,6 +36,7 @@ class App {
       'click',
       this._handleSettings.bind(this)
     );
+    listItems.addEventListener('dragstart', this._dragAndDrop.bind(this));
 
     // Get data from local storage
     this._getLocalStorageNotes();
@@ -78,7 +80,7 @@ class App {
         note.id
       }" style='background-color:rgb(${
       note.color
-    }); color: ${this._darkenRandomColor(note.color, 2.5)}'>
+    }); color: ${this._darkenRandomColor(note.color, 2.5)}' draggable="true">
         <h2 style='color: ${this._darkenRandomColor(note.color, 2.3)}'>${
       !note.title ? '' : note.title
     }</h2>
@@ -335,7 +337,7 @@ class App {
         </div>
         `;
       DOMelement.insertAdjacentHTML('afterbegin', html);
-    }, 2000);
+    }, 500);
   }
 
   // handles app settings - delete all button
@@ -415,6 +417,12 @@ class App {
 
       this._setLocalStorage('theme', this.#themeColor);
     });
+  }
+
+  _dragAndDrop(e) {
+    const draggable = e.target.closest('.list__item');
+    if (draggable) console.log('tak');
+    draggable.classList.add('dragging');
   }
 
   async _generateQuote() {
