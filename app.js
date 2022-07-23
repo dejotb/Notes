@@ -37,6 +37,11 @@ class App {
       this._handleSettings.bind(this)
     );
     listItems.addEventListener('dragstart', this._dragAndDrop.bind(this));
+    listItems.addEventListener(
+      'dragend',
+      this._handleOnDragAndDropEnd.bind(this)
+    );
+    listItems.addEventListener('dragover', this._dragOver.bind(this));
 
     // Get data from local storage
     this._getLocalStorageNotes();
@@ -421,8 +426,52 @@ class App {
 
   _dragAndDrop(e) {
     const draggable = e.target.closest('.list__item');
-    if (draggable) console.log('tak');
     draggable.classList.add('dragging');
+  }
+
+  _dragOver(e) {
+    e.preventDefault();
+    const draggable = e.target.closest('.list__item');
+    const afterElement = this._getDragAfterElement(listItems, e.clientX);
+    console.log(afterElement);
+    if (draggable == null) {
+      return;
+    }
+    if (afterElement == null) {
+      listItems.appendChild(draggable);
+    } else {
+      listItems.insertBefore(draggable, afterElement);
+    }
+  }
+
+  _handleOnDragAndDropEnd(e) {
+    const draggable = e.target.closest('.list__item');
+    draggable.classList.remove('dragging');
+  }
+
+  _getDragAfterElement(container, y) {
+    const draggableElements = [
+      ...container.querySelectorAll('.list__item:not(.dragging)'),
+    ];
+    console.log(draggableElements);
+    return draggableElements.reduce(
+      (closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.bottom - box.height / 2;
+        console.log(offset);
+        if (offset < 0 && offset > closest.offset) {
+          return {
+            offset,
+            element: child,
+          };
+        }
+
+        return closest;
+      },
+      {
+        offset: Number.NEGATIVE_INFINITY,
+      }
+    ).element;
   }
 
   async _generateQuote() {

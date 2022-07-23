@@ -219,8 +219,9 @@ fieldset {
   height: 10rem;
 }
 
-.list__item .dragging {
-  border: 1px solid red;
+.list__item.dragging {
+  /* border: 1px solid red; */
+  opacity: 0.5;
 }
 
 .form__title,
