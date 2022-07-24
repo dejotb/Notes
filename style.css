@@ -220,7 +220,6 @@ fieldset {
 }
 
 .list__item.dragging {
-  /* border: 1px solid red; */
   opacity: 0.5;
 }
 
@@ -252,7 +251,8 @@ fieldset {
 
 .button__form--delete,
 .button__form--save--exit,
-.button__alert--save--exit {
+.button__alert--save--exit,
+.button__form--pin {
   height: auto;
   margin: 0.5rem;
 }
@@ -270,7 +270,25 @@ fieldset {
 
 .button__form--delete {
   width: 2.5rem;
-  align-self: flex-end;
+  margin-left: auto;
+}
+
+.button__form--pin {
+  display: inline;
+  width: 2.5rem;
+}
+
+.button__form--pin > svg {
+  fill: var(--color-white);
+}
+
+.button__form--pin > svg:active {
+  fill: var(--color-green);
+}
+
+.buttons__container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .button__settings {

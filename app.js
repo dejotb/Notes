@@ -111,7 +111,7 @@ class App {
       <li class="list__item list__item--input" data-id="${
         note.id
       }" style='background-color:rgb(${note.color})'>
-        <button class="button button__form--save--exit" type="submit" title="save"> <img src="img/arrow.svg" alt="save note"></button>
+        <button class="button button__form--save--exit" type="submit" title="save and close"> <img src="img/arrow.svg" alt="save note"></button>
         <form class="form" name="notes__form">
           <input style='color: ${this._darkenRandomColor(
             note.color,
@@ -132,8 +132,14 @@ class App {
       2.5
     )}'>${!note.text ? '' : note.text}</textarea>
         </form>
-        <button class='button button__form--delete' title="delete"><img src="img/bin.svg" alt="delete note"></button>
-        <button class="button__form--pin">pin</button>
+        <div class="buttons__container">
+          <button class="button__form--pin" title="move to the top o a list">
+            <svg width="100%" height="100%" viewBox="0 0 96 96" version="1.1" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><path d="M64.41,1.838l28.91,28.912c0.453,0.451 0.453,1.189 0,1.641l-9.846,9.844c-0.451,0.453 -1.189,0.453 -1.64,-0l-2.799,-2.798l-12.977,12.975c2.911,10.966 0.071,23.143 -8.528,31.74c-0.199,0.201 -0.401,0.397 -0.606,0.59c-0.753,0.717 -0.632,0.712 -1.359,-0.015l-18.367,-18.367l-35.698,27.29l27.299,-35.688l-18.393,-18.392c-0.734,-0.735 -0.672,-0.62 0.049,-1.378c0.18,-0.188 0.364,-0.377 0.551,-0.565c8.597,-8.597 20.776,-11.439 31.741,-8.527l12.976,-12.975l-2.8,-2.799c-0.451,-0.451 -0.451,-1.189 0,-1.641l9.845,-9.847c0.453,-0.451 1.191,-0.451 1.642,0Z" style="stroke:#000;stroke-width:8px;"/></svg>
+            </button>
+            <button class='button button__form--delete' title="delete">
+            <img src="img/bin.svg" alt="delete note">
+          </button>
+        </div>
       </li>`;
 
     modalInput.insertAdjacentHTML('afterbegin', html);
