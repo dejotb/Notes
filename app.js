@@ -18,7 +18,6 @@ const containerSettings = document.querySelector('.container__settings');
 const modalContainer = document.querySelector('.container__modal');
 const modalInput = document.querySelector('.modal__input');
 const listItems = document.querySelector('.list__items');
-const listItem = document.querySelectorAll('.list__item');
 const buttonCreateNewNote = document.querySelector('.button--cta');
 const buttonSettings = document.querySelector('.button__settings');
 const settingsOptions = document.querySelector('.settings__options');
@@ -52,7 +51,7 @@ class App {
   }
 
   _newNote() {
-    // create new note
+    // Create new note
     const note = new Note(this._getRandomColor());
 
     // Add new note to notes array
@@ -60,6 +59,9 @@ class App {
 
     // Render input form
     this._renderFormInputItem(note);
+
+    // Remove pin button from new form input
+    this._removePinButton();
 
     // Animate new note button
     this._animateButton();
@@ -72,7 +74,15 @@ class App {
     document.querySelector('.instruction--create').remove();
   }
 
-  // rendereds list item
+  // Remove pin button from new form input
+  _removePinButton() {
+    const container = document.querySelector('.list__item--input');
+    const element = container.querySelector('.button__form--pin');
+
+    element.remove();
+  }
+
+  // Render list item
   _renderListItem(note) {
     const html = `
       <li class="list__item list__item--rendered" data-id="${
@@ -91,6 +101,7 @@ class App {
       </li>`;
 
     if (!note.title && !note.text) return;
+
     listItems.insertAdjacentHTML('afterbegin', html);
   }
 
@@ -122,6 +133,7 @@ class App {
     )}'>${!note.text ? '' : note.text}</textarea>
         </form>
         <button class='button button__form--delete' title="delete"><img src="img/bin.svg" alt="delete note"></button>
+        <button class="button__form--pin">pin</button>
       </li>`;
 
     modalInput.insertAdjacentHTML('afterbegin', html);
@@ -147,6 +159,10 @@ class App {
 
     if (e.target.closest('.button__form--delete')) {
       this._deleteSelectedNote(e);
+      this._setLocalStorage('notesOrder', listItems.innerHTML);
+    }
+    if (e.target.closest('.button__form--pin')) {
+      this._pinSelectedNote(e);
     }
 
     if (e.currentTarget.classList.contains('list__items')) {
@@ -165,7 +181,7 @@ class App {
     }
   }
 
-  // nadles visibility of a modal
+  // handles visibility of a modal
   _handleModalVisibility() {
     containerMain.style.opacity = 1;
     modalInput.textContent = '';
@@ -214,6 +230,33 @@ class App {
 
     if (!elId) return;
     elId.remove();
+  }
+
+  _pinSelectedNote(e) {
+    const el = e.target.closest('.list__item');
+    const activeEl = listItems.querySelector(`[data-id='${el.dataset.id}']`);
+    // console.log(activeEl);
+    const activeElId = activeEl.getAttribute('data-id');
+    listItems.insertAdjacentElement('afterbegin', activeEl);
+
+    containerMain.style.opacity = 1;
+
+    // console.log(this.#notes);
+
+    const pinnedEl = this.#notes.filter((ele) => ele.id === activeElId);
+    // console.log(pinnedEl);
+
+    const indexOfActiveElInArray = this.#notes.findIndex(
+      (item) => item.id === activeElId
+    );
+
+    this.#notes.splice(indexOfActiveElInArray, 1);
+
+    // console.log(this.#notes);
+
+    this.#notes.push(...pinnedEl);
+    // console.log(this.#notes);
+    this._setLocalStorage('notes', this.#notes);
   }
 
   _setLocalStorage(key, value) {
