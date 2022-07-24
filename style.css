@@ -283,8 +283,8 @@ fieldset {
 }
 
 .button__form--pin > svg:active {
-  fill: var(--color-green);
   transform: translate3d(-0.1rem, 0.4rem, 0);
+  fill: var(--color-green);
 }
 
 .buttons__container {
