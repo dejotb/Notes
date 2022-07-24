@@ -7,11 +7,12 @@ All notes are visible in the main panel. However, clicking on a note allows to s
 
 Additionally, the tool's settings options allow to:
 
-- generate a random, inspirational quote (used external API),
+- generate a random, inspirational quote (used external API) that changes every hour,
+- pin a note to the top of a list,
 - change theme,
 - delete all notes.
 
-Tool also gives instructions for the first entry of new note, in the form of arrows and comments that dissapear on creation of a second note.
+Tool also gives instructions for the first entry of new note, in the form of arrows and comments, that dissapear on creation of a second note.
 
 Notes and theme settings are stored in a local storage.
 
