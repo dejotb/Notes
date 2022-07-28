@@ -344,12 +344,6 @@ fieldset {
   color: var(--color-white);
 }
 
-.footer__logo {
-  display: flex;
-  grid-gap: 1rem;
-  justify-self: end;
-}
-
 .footer__logo > img {
   width: 10rem;
 }
