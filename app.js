@@ -241,16 +241,12 @@ class App {
   _pinSelectedNote(e) {
     const el = e.target.closest('.list__item');
     const activeEl = listItems.querySelector(`[data-id='${el.dataset.id}']`);
-    // console.log(activeEl);
     const activeElId = activeEl.getAttribute('data-id');
     listItems.insertAdjacentElement('afterbegin', activeEl);
 
     containerMain.style.opacity = 1;
 
-    // console.log(this.#notes);
-
     const pinnedEl = this.#notes.filter((ele) => ele.id === activeElId);
-    // console.log(pinnedEl);
 
     const indexOfActiveElInArray = this.#notes.findIndex(
       (item) => item.id === activeElId
@@ -258,10 +254,7 @@ class App {
 
     this.#notes.splice(indexOfActiveElInArray, 1);
 
-    // console.log(this.#notes);
-
     this.#notes.push(...pinnedEl);
-    // console.log(this.#notes);
     this._setLocalStorage('notes', this.#notes);
   }
 
